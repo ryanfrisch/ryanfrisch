@@ -1,12 +1,15 @@
+import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image } from 'react-native';
 import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import MessageScreen from '../screens/MessageScreen';
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Home';
+const INITIAL_ROUTE_NAME = 'Swipe';
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -17,32 +20,51 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
-          title: 'Get Started',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          title: 'Profile', //FIXME remove later
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-contact" />,
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="Swipe"
+        component={HomeScreen}
         options={{
-          title: 'Resources',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Swipe', //FIXME remove later
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-shirt" />, 
+        }}
+      />
+      <BottomTab.Screen
+        name="Messages"
+        component={MessageScreen}
+        options={{
+          title: 'Messages', //FIXME remove later
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-chatboxes" />, 
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-function getHeaderTitle(route) {
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 50, height: 80, marginTop: 20,}}
+      source={require('../assets/images/k-icon.png')}
+    />
+  );
+}
+
+function getHeaderTitle(route) { // FIXME get rid of header
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case 'Home':
-      return 'How to get started';
-    case 'Links':
-      return 'Links to learn more';
+    case 'Swipe':
+      return LogoTitle;
+    case 'Profile':
+      return 'Edit your profile and listings';
+    case 'Messages':
+      return 'View your messages';
   }
 }
