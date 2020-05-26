@@ -67,8 +67,7 @@ const styles = StyleSheet.create({
   listingCard: {
     flex: 3,
     backgroundColor: '#fbfbfb',
-    padding: 10,
-    margin: 30,
+    margin: 10,
     marginBottom: 10,
     borderRadius: 12,    
     ...Platform.select({
@@ -85,30 +84,42 @@ const styles = StyleSheet.create({
   },
   listingImage: {
     flex: 6,
-    margin: 12,
     marginBottom: 0,
-    borderRadius: 10,
+    borderRadius: 12,
     //resizeMode: 'contain',
-    height: 100,
-    width: 270,
+    height: '100%',
+    width: '100%',
     //borderColor: '#EAEAEA', FOR POLAROID LOOK
     //borderWidth: 2,
-    
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textGroup: {
-    flex: 1,
+    position: 'absolute',
+    bottom: 10,
     padding: 12,
     paddingTop: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
+    //alignItems: "center",
     // fontFamily: '', HANDWRITTEN FONT FOR POLAROID LOOK
-    alignItems: "center",
+   
   },
   bigText: {
-    fontSize: 30,
+    position: 'absolute', 
+    left: 10,
+    bottom: 0,
+    padding: 5,
+    paddingBottom: 0,
+    fontSize: 40,
+    color: 'white',
+    textShadowColor: 'black',
+    textShadowRadius: 7,
+    
   },
   smallText: {
+    position: 'absolute',
     fontSize: 16,
+    bottom: 0,
   },
 
   // BUTTONS

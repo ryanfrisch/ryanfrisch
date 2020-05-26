@@ -84,6 +84,12 @@ export default function ProfileScreen() {
   );
 }
 
+// Listing Thumbnail system for showing pictures?? 
+// // GOOD
+// var icon = this.props.active
+//   ? require('./my-icon-active.png')
+//   : require('./my-icon-inactive.png');
+// <Image source={icon} />;
 
 // style constants
 // const PREFER_BUTTON_CURVE_RADIUS = 20; NO LONGER USED
