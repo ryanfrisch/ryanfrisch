@@ -9,15 +9,15 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.listingCard}>
         <Image
-          source={require('../assets/images/my-profile-image.png')}
+          source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
           style={styles.listingImage}
         />
         <View style={styles.textGroup}>
           <Text style={styles.bigText}>
-            Patagonia
+            Thrasher
           </Text>
           <Text style={styles.smallText}>
-            S $19
+            $19
           </Text>
         </View>
       </View>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.2,
         shadowRadius: 9,
       },
       android: {
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     fontSize: 40,
     color: 'white',
-    textShadowColor: 'black',
-    textShadowRadius: 6,
+    textShadowColor: '#292929',
+    textShadowRadius: 8,
     //fontFamily: 'Baskerville',
     //fontWeight: 'bold',
     //fontStyle: 'italic',
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     bottom: 10,
     fontSize: 18,
     color: 'white',
-    textShadowColor: 'black',
-    textShadowRadius: 7,
+    textShadowColor: '#292929',
+    textShadowRadius: 8,
   },
 
   // BUTTONS

@@ -34,9 +34,7 @@ export default function ProfileScreen() {
           <View style={styles.imageAndNameContainer}>
             <Image 
               style={styles.profileImage}
-              source={{
-                uri: 'https://media-exp1.licdn.com/dms/image/C5603AQGYBeQVprIFwg/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=fEbT2bvAiwG_C-3KkL5m1cDW56NIoxx22EeX83UHKH8',
-              }}
+              source={require('../assets/images/my-profile-image.png')}
             />
             <Text style={styles.profileText}>Ryan Frisch</Text>
             <Text>Provo, UT</Text> 
@@ -54,24 +52,16 @@ export default function ProfileScreen() {
             />
           </TouchableOpacity>
           <Image style={styles.listingThumbnail}
-            source={{
-              uri: 'https://media-exp1.licdn.com/dms/image/C5603AQGYBeQVprIFwg/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=fEbT2bvAiwG_C-3KkL5m1cDW56NIoxx22EeX83UHKH8',
-            }}
+            source={require('../assets/images/clothingDemos/bananaSkirt.jpg')}
           />
           <Image style={styles.listingThumbnail}
-            source={{
-              uri: 'https://media-exp1.licdn.com/dms/image/C5603AQGYBeQVprIFwg/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=fEbT2bvAiwG_C-3KkL5m1cDW56NIoxx22EeX83UHKH8',
-            }}
+            source={require('../assets/images/clothingDemos/blackPants.jpg')}
           />
           <Image style={styles.listingThumbnail}
-            source={{
-              uri: 'https://media-exp1.licdn.com/dms/image/C5603AQGYBeQVprIFwg/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=fEbT2bvAiwG_C-3KkL5m1cDW56NIoxx22EeX83UHKH8',
-            }}
+            source={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
           />
           <Image style={styles.listingThumbnail}
-            source={{
-              uri: 'https://media-exp1.licdn.com/dms/image/C5603AQGYBeQVprIFwg/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=fEbT2bvAiwG_C-3KkL5m1cDW56NIoxx22EeX83UHKH8',
-            }}
+            source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
           />
           {/* <Text>
           You have no listings at this time.
