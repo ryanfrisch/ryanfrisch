@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'white',
     textShadowColor: 'black',
-    textShadowRadius: 7,
+    textShadowRadius: 6,
     //fontFamily: 'Baskerville',
     //fontWeight: 'bold',
     //fontStyle: 'italic',

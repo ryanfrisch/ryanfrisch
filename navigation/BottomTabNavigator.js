@@ -47,24 +47,24 @@ export default function BottomTabNavigator({ navigation, route }) {
   );
 }
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 80, marginTop: 20,}}
-      source={require('../assets/images/k-icon.png')}
-    />
-  );
-}
+// function LogoTitle() {
+//   return (
+//     <Image
+//       style={{ width: 50, height: 80, marginTop: 20,}}
+//       source={require('../assets/images/k-icon.png')}
+//     />
+//   );
+// }
 
 function getHeaderTitle(route) { // FIXME get rid of header
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
     case 'Swipe':
-      return LogoTitle;
+      return '';
     case 'Profile':
-      return 'Edit your profile and listings';
+      return '';
     case 'Messages':
-      return 'View your messages';
+      return '';
   }
 }
