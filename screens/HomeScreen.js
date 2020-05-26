@@ -25,22 +25,22 @@ export default function HomeScreen() {
         <TouchableOpacity style={styles.dislikeButton} activeOpacity={.5}> 
           <Ionicons
             name='ios-close'
-            size='60'
-            color='white'
+            size='70'
+            color='#4EE2C6'
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.instantBuyButton} activeOpacity={.5}> 
           <Ionicons
             name='ios-cash'
-            size='30'
-            color='white'
+            size='36'
+            color='#FDBD1A'
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.likeButton} activeOpacity={.5}> 
           <Ionicons
             name='ios-heart'
-            size='45'
-            color='white'
+            size='46'
+            color='#EE2C50'
           />
         </TouchableOpacity>
       </View>
@@ -51,7 +51,7 @@ export default function HomeScreen() {
 
 // styles below
 
-const BUTTON_W_H = 80;
+const BUTTON_W_H = 70;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
 const RED = '#EE2C50';
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
 
   listingCard: {
-    flex: 4,
+    flex: 5,
     backgroundColor: '#fbfbfb',
     margin: 10,
     marginBottom: 0,
@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
   },
   smallText: {
     position: 'absolute',
-    right: 10,
+    right: 15,
     bottom: 10,
-    fontSize: 16,
+    fontSize: 18,
     color: 'white',
     textShadowColor: 'black',
     textShadowRadius: 7,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.2,
+        shadowOpacity: 0.1,
         shadowRadius: 5,
       },
       android: {
@@ -148,32 +148,40 @@ const styles = StyleSheet.create({
     }),
   },
   instantBuyButton: {
-    backgroundColor: YELLOW,
-    height: BUTTON_W_H * .8,
-    width: BUTTON_W_H * .8,
-    borderRadius: BUTTON_W_H * .8 * .5,
+    backgroundColor: 'white',
+    height: BUTTON_W_H * .85,
+    width: BUTTON_W_H * .85,
+    borderRadius: BUTTON_W_H * .85 * .5,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 18,
-    marginTop: -5,
+    marginLeft: 18,
+    marginRight: 18,
+    paddingTop: 2,
+    paddingLeft: 2,
   },
   likeButton: {
-    backgroundColor: TEAL,
+    backgroundColor: 'white',
     height: BUTTON_W_H,
     width: BUTTON_W_H,
     borderRadius: BUTTON_W_H * .5,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 12,
+    marginLeft: 12,
+    marginRight: 12,
+    paddingTop: 6,
+    paddingLeft: 2,
   },
   dislikeButton: {
-    backgroundColor: RED,
+    backgroundColor: 'white',
     height: BUTTON_W_H,
     width: BUTTON_W_H,
     borderRadius: BUTTON_W_H * .5,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 12,
+    marginLeft: 12,
+    marginRight: 12,
+    paddingTop: 0,
+    paddingLeft: 1,
   }
 });
 
