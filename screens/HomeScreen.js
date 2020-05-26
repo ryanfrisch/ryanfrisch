@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
   return (
@@ -65,10 +66,10 @@ const styles = StyleSheet.create({
   },
 
   listingCard: {
-    flex: 3,
+    flex: 4,
     backgroundColor: '#fbfbfb',
     margin: 10,
-    marginBottom: 10,
+    marginBottom: 0,
     borderRadius: 12,    
     ...Platform.select({
       ios: {
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     }),
   },
   listingImage: {
-    flex: 6,
     marginBottom: 0,
     borderRadius: 12,
     //resizeMode: 'contain',
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
     bottom: 10,
     padding: 12,
     paddingTop: 0,
+    width: '100%',
     //justifyContent: 'space-between',
     //alignItems: "center",
     // fontFamily: '', HANDWRITTEN FONT FOR POLAROID LOOK
-   
   },
   bigText: {
     position: 'absolute', 
@@ -114,12 +114,18 @@ const styles = StyleSheet.create({
     color: 'white',
     textShadowColor: 'black',
     textShadowRadius: 7,
-    
+    //fontFamily: 'Baskerville',
+    //fontWeight: 'bold',
+    //fontStyle: 'italic',
   },
   smallText: {
     position: 'absolute',
+    right: 10,
+    bottom: 10,
     fontSize: 16,
-    bottom: 0,
+    color: 'white',
+    textShadowColor: 'black',
+    textShadowRadius: 7,
   },
 
   // BUTTONS
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'center',
     alignItems: "center",
-    marginTop: -10,
+    marginTop: 0,
     ...Platform.select({
       ios: {
         shadowColor: 'black',
