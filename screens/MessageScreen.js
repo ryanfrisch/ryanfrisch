@@ -4,6 +4,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
+const BACKGROUND_COLOR = '#F2F2F2';
+
 export default function MessageScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -41,7 +43,7 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: BACKGROUND_COLOR,
   },
   contentContainer: {
     paddingTop: 15,
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   option: {
-    backgroundColor: '#fdfdfd',
+    backgroundColor: BACKGROUND_COLOR,
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderWidth: StyleSheet.hairlineWidth,

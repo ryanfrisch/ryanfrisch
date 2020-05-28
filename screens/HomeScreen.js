@@ -4,6 +4,8 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
+
+
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -50,7 +52,7 @@ export default function HomeScreen() {
 
 
 // styles below
-
+const BACKGROUND_COLOR = '#F2F2F2';
 const BUTTON_W_H = 70;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: BACKGROUND_COLOR,
     alignItems: "stretch",
   },
 
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.2,
-        shadowRadius: 9,
+        shadowRadius: 6,
       },
       android: {
         elevation: 20,

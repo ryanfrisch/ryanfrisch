@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
-import { MonoText } from '../components/StyledText';
 import iconSet from '@expo/vector-icons/build/FontAwesome5';
 import { startClock } from 'react-native-reanimated';
 
 /* FIXME add real location */
 /* FIXME add real number of listings and changing plural "listing" */
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   // FIXME remove this counter and add a legit onpress action for Preferences button
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
@@ -44,7 +43,11 @@ export default function ProfileScreen() {
         </View>
         
         <View style={styles.allListings}>
-          <TouchableOpacity style={styles.listingThumbnail} activeOpacity={.5}>
+          <TouchableOpacity 
+            style={styles.listingThumbnail} 
+            activeOpacity={.5}
+            onPress={() => navigation.navigate('Home')}  
+          >
             <Ionicons
               name='ios-add'
               size='60'
@@ -88,11 +91,12 @@ const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
 const RED = '#EE2C50';
 const YELLOW = '#FDBD1A';
+const BACKGROUND_COLOR = '#F2F2F2';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: BACKGROUND_COLOR,
     alignItems: "stretch",
   },
   contentContainer: {
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
   profileCard: {
     backgroundColor: '#fbfbfb',
     padding: 20,
-    margin: 30,
+    margin: 15,
     marginBottom: 10,
     alignItems: "center",
     borderRadius: 12,    
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.1,
-        shadowRadius: 9,
+        shadowRadius: 6,
       },
       android: {
         elevation: 20,
@@ -156,7 +160,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.1,
-        shadowRadius: 9,
+        shadowRadius: 6,
       },
       android: {
         elevation: 20,
@@ -164,7 +168,7 @@ const styles = StyleSheet.create({
     }),
     backgroundColor: '#fbfbfb',
     padding: 6,
-    margin: 30,
+    margin: 15,
     marginBottom: 10,
     flexWrap: "wrap",
     flexDirection: "row",
@@ -175,8 +179,8 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     margin: 5,
     marginBottom: 7,
-    height: 90,
-    width: 90,
+    height: 101,
+    width: 101,
     backgroundColor: TEAL,
     alignItems: "center",
     justifyContent: "center",
@@ -204,6 +208,9 @@ const styles = StyleSheet.create({
 
 });
 
+//Use the following for sequences (aka intro sequence or new listing sequence)
+//<Button title="Go to Home" onPress={() => navigation.navigate('Home', { /* add params here */ })} />
+//<Button title="Go back" onPress={() => navigation.goBack()} />
 
 
 // FOR REFERENCE
