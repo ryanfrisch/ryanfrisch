@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
+//import CustomIcon from '../constants/CustomIcon'
 import iconSet from '@expo/vector-icons/build/FontAwesome5';
 import { startClock } from 'react-native-reanimated';
 
@@ -11,7 +12,7 @@ import { startClock } from 'react-native-reanimated';
 /* FIXME add real number of listings and changing plural "listing" */
 
 export default function ProfileScreen({ navigation }) {
-  // FIXME remove this counter and add a legit onpress action for Preferences button
+  // FIXME remove this counter and add a legit onpress action for edit button
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
 
@@ -108,18 +109,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fbfbfb',
     padding: 20,
     margin: 15,
+    marginTop: 10,
     marginBottom: 10,
     alignItems: "center",
     borderRadius: 12,    
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: '#292929',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.05,
         shadowRadius: 6,
       },
       android: {
-        elevation: 20,
+        elevation: 10,
       },
     }),
   },
@@ -157,9 +159,9 @@ const styles = StyleSheet.create({
   allListings: {
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: '#292929',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.05,
         shadowRadius: 6,
       },
       android: {

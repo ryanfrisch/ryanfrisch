@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.2,
+        shadowOpacity: 0.1,
         shadowRadius: 6,
       },
       android: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'white',
     textShadowColor: '#292929',
-    textShadowRadius: 8,
+    textShadowRadius: 6,
     //fontFamily: 'Baskerville',
     //fontWeight: 'bold',
     //fontStyle: 'italic',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white',
     textShadowColor: '#292929',
-    textShadowRadius: 8,
+    textShadowRadius: 6,
   },
 
   // BUTTONS
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: '#292929',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.1,
         shadowRadius: 5,
