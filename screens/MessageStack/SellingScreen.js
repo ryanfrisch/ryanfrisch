@@ -5,13 +5,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 // FIXME find a way to not repeat on every page
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../assets/fonts/config.json';
-const expoAssetId = require('../assets/fonts/icomoon.ttf');
+import icoMoonConfig from '../../assets/fonts/config.json';
+const expoAssetId = require('../../assets/fonts/icomoon.ttf');
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
 const BACKGROUND_COLOR = '#F2F2F2';
 
-export default function MessageScreen() {
+export default function SellingScreen() {
   return (
     <LinearGradient
       colors={[BACKGROUND_COLOR, '#D1D1D1']}
@@ -22,35 +22,35 @@ export default function MessageScreen() {
         <View style={styles.buyingTab}>
           <View style={styles.likesContainer}>
             <Image 
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../../assets/images/my-profile-image.png')}
               style={styles.likeImage}
             />
             <Image 
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../../assets/images/my-profile-image.png')}
               style={styles.likeImage}
             />
             <Image 
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../../assets/images/my-profile-image.png')}
               style={styles.likeImage}
             />
             <Image 
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../../assets/images/my-profile-image.png')}
               style={styles.likeImage}
             />
             <Image 
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../../assets/images/my-profile-image.png')}
               style={styles.likeImage}
             />
           </View>
           <View style={styles.messagesContainer}>
             <TouchableOpacity style={styles.message}>
               <Image 
-                source={require('../assets/images/my-profile-image.png')}
+                source={require('../../assets/images/my-profile-image.png')}
                 style={styles.messageImage}
               />
               <View style={styles.textGroup}>
                 <Text style={styles.nameText}>
-                  Patagonia T-Shirt
+                  SELLING SCREEN
                 </Text>
                 <Text style={styles.mostRecentMessageText}>
                   Hey is this still available?
@@ -59,7 +59,7 @@ export default function MessageScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.message}>
               <Image 
-                source={require('../assets/images/my-profile-image.png')}
+                source={require('../../assets/images/my-profile-image.png')}
                 style={styles.messageImage}
               />
               <View style={styles.textGroup}>
@@ -73,7 +73,7 @@ export default function MessageScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.message}>
               <Image
-                source={require('../assets/images/my-profile-image.png')}
+                source={require('../../assets/images/my-profile-image.png')}
                 style={styles.messageImage}
               />
               <View style={styles.textGroup}>

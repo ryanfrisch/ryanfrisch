@@ -1,13 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-
-//import CustomIcon from '../constants/CustomIcon'
-import iconSet from '@expo/vector-icons/build/FontAwesome5';
-import { startClock } from 'react-native-reanimated';
 
 // FIXME find a way to not repeat on every page
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
@@ -33,7 +27,7 @@ export default function ProfileScreen({ navigation }) {
         <View style={styles.profileCard}>
           <TouchableOpacity 
             style={styles.editButton}
-            onPress={onPress}
+            onPress={() => navigation.navigate('EditProfile')}
             activeOpacity={.5}
           >
             <Icon
@@ -59,7 +53,7 @@ export default function ProfileScreen({ navigation }) {
           <TouchableOpacity 
             style={styles.listingThumbnail} 
             activeOpacity={.5}
-            onPress={() => navigation.navigate('Home')}  
+            onPress={() => navigation.navigate('NewListing')}  
           >
             <LinearGradient
               colors={[TEAL, '#9CEEC9']}

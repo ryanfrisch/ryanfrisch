@@ -23,11 +23,15 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
 import useCachedResources from './hooks/useCachedResources';
 
-import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import EditProfileScreen from './screens/ProfileStack/EditProfile';
+import NewListingScreen from './screens/ProfileStack/NewListing';
+import HomeScreen from './screens/HomeScreen';
 import MessageScreen from './screens/MessageScreen';
+import SellingScreen from './screens/MessageStack/SellingScreen';
 
 const BACKGROUND_COLOR = '#F2F2F2';
+const RED = '#EE2C50';
 const Stack = createStackNavigator(); 
 
 function ProfileStack() {
@@ -37,9 +41,38 @@ function ProfileStack() {
       headerMode='none'
     > 
       <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="NewListing" component={HomeScreen} />
-
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="NewListing" component={NewListingScreen} />
     </Stack.Navigator>
+  );
+}
+
+function MessageStack() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        showLabel: true,
+        labelStyle: styles.labelStyle,
+        showIcon: false,
+        pressOpacity: .6,
+        activeTintColor: 'black',
+        inactiveTintColor: 'gray',
+        style: styles.messageTabBarStyle,
+        tabStyle: styles.tabStyle,
+        indicatorStyle: { backgroundColor: RED },
+        scrollEnabled: false, // true would allow the icons to move to center as its activated
+        allowFontScaling: false,
+      }}
+      tabBarPosition='top'
+      backBehavior='none'
+      initialRouteName="Buying" 
+      headerMode='none'
+      initialLayout={{ width: Dimensions.get('window').width }}
+    > 
+      <Tab.Screen name="Buying" component={MessageScreen} />
+      <Tab.Screen name="Selling" component={SellingScreen} />
+
+    </Tab.Navigator>
   );
 }
 
@@ -88,8 +121,6 @@ export default function App(props) {
             showLabel: false,
             showIcon: true,
             pressOpacity: .6,
-            activeTintColor: 'gray',
-            inactiveTintColor: 'gray',
             style: styles.tabBarStyle,
             tabStyle: styles.tabStyle,
             indicatorStyle: { backgroundColor: BACKGROUND_COLOR },
@@ -116,7 +147,7 @@ export default function App(props) {
           />
           <Tab.Screen
             name="Messages"
-            component={MessageScreen}
+            component={MessageStack}
             //options={{ title: 'Messages' }}
           />
           
@@ -149,11 +180,10 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: BACKGROUND_COLOR,
     shadowColor: BACKGROUND_COLOR,
+    elevation: 0,
     //height: 60,
     marginTop: 0,
-    paddingTop: 10,
-    paddingBottom: 0,
-    elevation: 0,
+    paddingTop: 10,    
     paddingBottom: 10,
   },
   tabStyle: {
@@ -167,6 +197,18 @@ const styles = StyleSheet.create({
   iconStyle: {
     fontSize: 25,
     margin: 0,
+  },
+  
+  messageTabBarStyle: {
+    backgroundColor: BACKGROUND_COLOR,
+    shadowColor: BACKGROUND_COLOR,
+    elevation: 0,
+    //height: 60,
+    marginTop: -10,
+  },
+  labelStyle: {
+    fontFamily: 'Inter-Black',
+    fontSize: 15,
   },
 });
 
