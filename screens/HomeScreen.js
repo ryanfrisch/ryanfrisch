@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,10 +11,15 @@ import icoMoonConfig from '../assets/fonts/config.json';
 const expoAssetId = require('../assets/fonts/icomoon.ttf');
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
+
 export default function HomeScreen() {
+
+  const [count, setCount] = useState(0);
+  const onPress = () => setCount(prevCount => prevCount + 1);
+
   return (
     <LinearGradient
-      colors={[BACKGROUND_COLOR, BACKGROUND_COLOR]}
+      colors={[BACKGROUND_COLOR, '#D5D5D5']}
       locations={[0.0, 1.0]}
       style={styles.container}
     >
@@ -23,6 +28,12 @@ export default function HomeScreen() {
           source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
           style={styles.listingImage}
         />
+        <LinearGradient
+          colors={['white', 'white', 'black']}
+          locations={[0.0, 0.7, 1.0]}
+          style={styles.opaqueGradient}
+        >
+        </LinearGradient>
         <View style={styles.textGroup}>
           <Text style={styles.bigText}>
             Thrasher
@@ -33,39 +44,69 @@ export default function HomeScreen() {
         </View>
       </View>
       <View style={styles.swipeButtons}> 
-        <TouchableOpacity style={styles.dislikeButton} activeOpacity={.5}> 
-          <Icon
-            style={{ fontFamily: "LinzIcons" }}
-            name='linzIcons-05'
-            size='45'
-            color='#4EE2C6'
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.instantBuyButton} activeOpacity={.5}> 
-          <Icon
-            style={{ fontFamily: "LinzIcons" }}
-            name='linzIcons-02'
-            size='36'
-            color='#FDBD1A'
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.likeButton} activeOpacity={.5}> 
-          <Icon
-            style={{ fontFamily: "LinzIcons" }}
-            name='linzIcons-08'
-            size='45'
-            color='#EE2C50'
-          />
-        </TouchableOpacity>
+        <SwipeButton // rewind button
+          icon="linzIcons-03"
+          bigOrSmall='small'
+          color='#661DCE'
+          onPress={onPress}
+        />
+        <SwipeButton // trash button
+          icon="linzIcons-05"
+          bigOrSmall='big'
+          color='#4EE2C6'
+          onPress={onPress}
+        />
+        <SwipeButton // instaMessage button
+          icon="linzIcons-02"
+          bigOrSmall='small'
+          color='#FDBD1A'
+          onPress={onPress}
+        />
+        <SwipeButton // heart button
+          icon="linzIcons-08"
+          bigOrSmall='big'
+          color='#EE2C50'
+          onPress={onPress}
+        />
+        <SwipeButton // share button
+          icon="linzIcons-02"
+          bigOrSmall='small'
+          color='#FDBD1A'
+          onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
+        />
       </View>
     </LinearGradient>
   );
 }
 
 
+function SwipeButton({ icon, bigOrSmall, onPress, color}) {
+  let size;
+  let buttonStyle;
+  if(bigOrSmall === 'big') {
+    size = 45;
+    buttonStyle = styles.bigButton;
+  } else {
+    size = 36;
+    buttonStyle = styles.smallButton;
+  }
+  return (
+    <TouchableOpacity style={buttonStyle} activeOpacity={.6} onPress={onPress}> 
+      <Icon
+        style={{ fontFamily: "LinzIcons" }}
+        name={icon}
+        size={size}
+        color={color}
+      />
+    </TouchableOpacity>
+  );
+}
+
+
+
 // styles below
 const BACKGROUND_COLOR = '#F2F2F2';
-const BUTTON_W_H = 70;
+const BUTTON_W_H = 65;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
 const RED = '#EE2C50';
@@ -98,15 +139,20 @@ const styles = StyleSheet.create({
     }),
   },
   listingImage: {
-    marginBottom: 0,
     borderRadius: 12,
     //resizeMode: 'contain',
     height: '100%',
     width: '100%',
-    //borderColor: '#EAEAEA', FOR POLAROID LOOK
-    //borderWidth: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  opaqueGradient: {
+    position: 'absolute',
+    bottom: 0,
+    padding: 12,
+    paddingTop: 0,
+    width: '100%',
+    height: '100%',
+    opacity: .3,
+    borderRadius: 12,
   },
   textGroup: {
     position: 'absolute',
@@ -161,38 +207,26 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  instantBuyButton: {
-    backgroundColor: 'white',
-    height: BUTTON_W_H * .85,
-    width: BUTTON_W_H * .85,
-    borderRadius: BUTTON_W_H * .85 * .5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 18,
-    marginRight: 18,
-  },
-  likeButton: {
+  bigButton: {
     backgroundColor: 'white',
     height: BUTTON_W_H,
     width: BUTTON_W_H,
     borderRadius: BUTTON_W_H * .5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 12,
-    marginRight: 12,
+    marginLeft: 6,
+    marginRight: 6,
   },
-  dislikeButton: {
+  smallButton: {
     backgroundColor: 'white',
-    height: BUTTON_W_H,
-    width: BUTTON_W_H,
-    borderRadius: BUTTON_W_H * .5,
+    height: BUTTON_W_H * .8,
+    width: BUTTON_W_H * .8,
+    borderRadius: BUTTON_W_H * .8 * .5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 12,
-    marginRight: 12,
-    paddingTop: -1,
-    paddingLeft: -1,
-  }
+    marginLeft: 6,
+    marginRight: 6,
+  },  
 });
 
 // show one image or the other
