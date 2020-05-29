@@ -9,6 +9,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import iconSet from '@expo/vector-icons/build/FontAwesome5';
 import { startClock } from 'react-native-reanimated';
 
+// FIXME find a way to not repeat on every page
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import icoMoonConfig from '../assets/fonts/config.json';
+const expoAssetId = require('../assets/fonts/icomoon.ttf');
+const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
+
 /* FIXME add real location */
 /* FIXME add real number of listings and changing plural "listing" */
 
@@ -31,6 +37,7 @@ export default function ProfileScreen({ navigation }) {
             activeOpacity={.5}
           >
             <Icon
+              style={{ fontFamily: "LinzIcons" }}
               name='linzIcons-07'
               size='30'
               color='black'
@@ -59,6 +66,7 @@ export default function ProfileScreen({ navigation }) {
               style={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center', borderRadius: 6 }}
             >
               <Icon
+                style={{ fontFamily: "LinzIcons" }}
                 name='linzIcons-01'
                 size='60'
                 color='white'
@@ -108,10 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR,
     alignItems: "stretch",
   },
-  contentContainer: {
-    paddingTop: 15,
-  },
-
   // profile image styling
   profileCard: {
     backgroundColor: '#fbfbfb',

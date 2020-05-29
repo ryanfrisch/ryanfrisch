@@ -5,6 +5,11 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 
+// FIXME find a way to not repeat on every page
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import icoMoonConfig from '../assets/fonts/config.json';
+const expoAssetId = require('../assets/fonts/icomoon.ttf');
+const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
 export default function HomeScreen() {
   return (
@@ -30,6 +35,7 @@ export default function HomeScreen() {
       <View style={styles.swipeButtons}> 
         <TouchableOpacity style={styles.dislikeButton} activeOpacity={.5}> 
           <Icon
+            style={{ fontFamily: "LinzIcons" }}
             name='linzIcons-05'
             size='45'
             color='#4EE2C6'
@@ -37,6 +43,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.instantBuyButton} activeOpacity={.5}> 
           <Icon
+            style={{ fontFamily: "LinzIcons" }}
             name='linzIcons-02'
             size='36'
             color='#FDBD1A'
@@ -44,6 +51,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.likeButton} activeOpacity={.5}> 
           <Icon
+            style={{ fontFamily: "LinzIcons" }}
             name='linzIcons-08'
             size='45'
             color='#EE2C50'

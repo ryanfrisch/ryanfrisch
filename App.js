@@ -3,12 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useState, useEffect } from "react";
-import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Text, Dimensions } from 'react-native';
 import Colors from './constants/Colors';
 import { AppLoading } from "expo";
 
 import * as Font from "expo-font";
 import { Ionicons } from '@expo/vector-icons';
+
+// set up linzi's custom icons
+// FIXME find a way to not repeat on every page
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import icoMoonConfig from './assets/fonts/config.json';
+const expoAssetId = require('./assets/fonts/icomoon.ttf');
+const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
 // import {
 //   Inter_900Black,
@@ -41,7 +48,8 @@ function ProfileStack() {
 const Tab = createMaterialTopTabNavigator();
 
 export default function App(props) {
-  const isLoadingComplete = useCachedResources();
+  //const isLoadingComplete = useCachedResources();
+
   let [fontsLoaded] = useFonts({
     "Inter-Light": require("./assets/fonts/Inter-Light.otf"),
     "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
@@ -50,16 +58,17 @@ export default function App(props) {
   });
   
   // maybe return <AppLoading /> look into later
-  if (!fontsLoaded || !isLoadingComplete) {
+  if (!fontsLoaded /*|| !isLoadingComplete*/) {
     return null;
   } else {
     return (
       <NavigationContainer>
         <Tab.Navigator 
+          
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-              size = 28;
+              
 
               if (route.name === 'Home') {
                 iconName = focused ? 'linzIcons-11' : 'linzIcons-11';
@@ -72,7 +81,7 @@ export default function App(props) {
                 color = focused ? Colors.RED : 'gray';
               }
               // You can return any component that you like here!
-              return <Icon name={iconName} size={size} color={color} />;
+              return <Icon style={styles.iconStyle} name={iconName} color={color} />;
             },
           })}
           tabBarOptions={{
@@ -82,14 +91,19 @@ export default function App(props) {
             activeTintColor: 'gray',
             inactiveTintColor: 'gray',
             style: styles.tabBarStyle,
+            tabStyle: styles.tabStyle,
             indicatorStyle: { backgroundColor: BACKGROUND_COLOR },
-            
+            scrollEnabled: false, // true would allow the icons to move to center as its activated
+            iconStyle: styles.iconStyle,
+            allowFontScaling: false,
           }}
+          tabBarPosition='top'
           backBehavior='none'
           initialRouteName="Home" 
           headerMode='none'
+          initialLayout={{ width: Dimensions.get('window').width }}
+          
         >
-
           <Tab.Screen
             name="Profile"
             component={ProfileStack}
@@ -134,13 +148,26 @@ const styles = StyleSheet.create({
   },
   tabBarStyle: {
     backgroundColor: BACKGROUND_COLOR,
+    shadowColor: BACKGROUND_COLOR,
     //height: 60,
-    marginTop: 5,
+    marginTop: 0,
     paddingTop: 10,
     paddingBottom: 0,
     elevation: 0,
-    shadowColor: BACKGROUND_COLOR,
-  }
+    paddingBottom: 10,
+  },
+  tabStyle: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    padding: 20,
+    //backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconStyle: {
+    fontSize: 25,
+    margin: 0,
+  },
 });
 
 
