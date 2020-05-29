@@ -3,12 +3,16 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[BACKGROUND_COLOR, BACKGROUND_COLOR]}
+      locations={[0.0, 1.0]}
+      style={styles.container}
+    >
       <View style={styles.listingCard}>
         <Image
           source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
@@ -25,28 +29,28 @@ export default function HomeScreen() {
       </View>
       <View style={styles.swipeButtons}> 
         <TouchableOpacity style={styles.dislikeButton} activeOpacity={.5}> 
-          <Ionicons
-            name='ios-close'
-            size='70'
+          <Icon
+            name='linzIcons-05'
+            size='45'
             color='#4EE2C6'
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.instantBuyButton} activeOpacity={.5}> 
-          <Ionicons
-            name='ios-cash'
+          <Icon
+            name='linzIcons-02'
             size='36'
             color='#FDBD1A'
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.likeButton} activeOpacity={.5}> 
-          <Ionicons
-            name='ios-heart'
-            size='46'
+          <Icon
+            name='linzIcons-08'
+            size='45'
             color='#EE2C50'
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -158,8 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 18,
     marginRight: 18,
-    paddingTop: 2,
-    paddingLeft: 2,
   },
   likeButton: {
     backgroundColor: 'white',
@@ -170,8 +172,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 12,
     marginRight: 12,
-    paddingTop: 6,
-    paddingLeft: 2,
   },
   dislikeButton: {
     backgroundColor: 'white',
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 12,
     marginRight: 12,
-    paddingTop: 0,
-    paddingLeft: 1,
+    paddingTop: -1,
+    paddingLeft: -1,
   }
 });
 

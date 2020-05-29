@@ -3,6 +3,7 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 //import CustomIcon from '../constants/CustomIcon'
 import iconSet from '@expo/vector-icons/build/FontAwesome5';
@@ -17,7 +18,11 @@ export default function ProfileScreen({ navigation }) {
   const onPress = () => setCount(prevCount => prevCount + 1);
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[BACKGROUND_COLOR, '#D1D1D1']}
+      locations={[0.0, 1.0]}
+      style={styles.container}
+    >
       <ScrollView>
         <View style={styles.profileCard}>
           <TouchableOpacity 
@@ -25,10 +30,10 @@ export default function ProfileScreen({ navigation }) {
             onPress={onPress}
             activeOpacity={.5}
           >
-            <Ionicons
-              name='ios-settings'
-              size='20'
-              color='white'
+            <Icon
+              name='linzIcons-07'
+              size='30'
+              color='black'
             />
           </TouchableOpacity>
           <View style={styles.imageAndNameContainer}>
@@ -37,8 +42,8 @@ export default function ProfileScreen({ navigation }) {
               source={require('../assets/images/my-profile-image.png')}
             />
             <Text style={styles.profileText}>Ryan Frisch</Text>
-            <Text>Provo, UT</Text> 
-            <Text>0 Listings</Text> 
+            <Text style={styles.profileSubtext}>Provo, UT</Text> 
+            <Text style={styles.profileSubtext}>0 Listings</Text> 
             
           </View>
         </View>
@@ -49,11 +54,16 @@ export default function ProfileScreen({ navigation }) {
             activeOpacity={.5}
             onPress={() => navigation.navigate('Home')}  
           >
-            <Ionicons
-              name='ios-add'
-              size='60'
-              color='white'
-            />
+            <LinearGradient
+              colors={[TEAL, '#9CEEC9']}
+              style={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center', borderRadius: 6 }}
+            >
+              <Icon
+                name='linzIcons-01'
+                size='60'
+                color='white'
+              />
+            </LinearGradient>
           </TouchableOpacity>
           <Image style={styles.listingThumbnail}
             source={require('../assets/images/clothingDemos/bananaSkirt.jpg')}
@@ -70,11 +80,9 @@ export default function ProfileScreen({ navigation }) {
           {/* <Text>
           You have no listings at this time.
           </Text> */}
-        </View>
-        
-       
+        </View>      
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: '#292929',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.05,
+        shadowOpacity: 0.1,
         shadowRadius: 6,
       },
       android: {
@@ -126,10 +134,9 @@ const styles = StyleSheet.create({
     }),
   },
   editButton: {
-    backgroundColor: TEAL,
+    //backgroundColor: "#D7D7D7",
     alignSelf: 'flex-end',
-    height: 33,
-    width: 33,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 7,
@@ -143,7 +150,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     overflow: 'hidden',
-    borderColor: TEAL,
+    borderColor: "#ECECEC",
     borderWidth: 7,
     borderRadius: IMAGE_CURVE_RADIUS,
   },
@@ -152,7 +159,11 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 30,
     fontWeight: "500",
-    //fontFamily: FIXME ADD CUSTOM FONT
+    fontFamily: 'Inter-Black'
+  },
+  profileSubtext: {
+    fontFamily: 'Inter-Light',
+    fontSize: 15,
   },
 
   // LISTINGS
@@ -161,7 +172,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: '#292929',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.05,
+        shadowOpacity: 0.1,
         shadowRadius: 6,
       },
       android: {
@@ -183,7 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: 7,
     height: 101,
     width: 101,
-    backgroundColor: TEAL,
+    backgroundColor: '#D7D7D7',
     alignItems: "center",
     justifyContent: "center",
   },

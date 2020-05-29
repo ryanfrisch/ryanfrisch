@@ -3,25 +3,32 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const BACKGROUND_COLOR = '#F2F2F2';
 
 export default function MessageScreen() {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <OptionButton
-        icon="md-school"
-        label="Read the Expo documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
-      />
+    <LinearGradient
+      colors={[BACKGROUND_COLOR, '#D1D1D1']}
+      locations={[0.0, 1.0]}
+      style={styles.container}
+    >
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <OptionButton
+          icon="md-school"
+          label="Read the Expo documentation"
+          onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
+        />
 
-      <OptionButton
-        icon="ios-chatboxes"
-        label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
-        isLastOption
-      />
-    </ScrollView>
+        <OptionButton
+          icon="ios-chatboxes"
+          label="Ask a question on the forums"
+          onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
+          isLastOption
+        />
+      </ScrollView>
+    </LinearGradient>
   );
 }
 

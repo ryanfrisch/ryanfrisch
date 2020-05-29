@@ -1,48 +1,24 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect } from "react";
+import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 import Colors from './constants/Colors';
+import { AppLoading } from "expo";
+
+import * as Font from "expo-font";
+import { Ionicons } from '@expo/vector-icons';
+
+// import {
+//   Inter_900Black,
+// } from '@expo-google-fonts/inter';
 
 import useCachedResources from './hooks/useCachedResources';
 
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import MessageScreen from './screens/MessageScreen';
-
-// TO ADD NOTIFICATIONS FOR THE ICONS (LIKE FOR NEW MESSAGES)
-// function IconWithBadge({ name, badgeCount, color, size }) {
-//   return (
-//     <View style={{ width: 24, height: 24, margin: 5 }}>
-//       <Ionicons name={name} size={size} color={color} />
-//       {badgeCount > 0 && (
-//         <View
-//           style={{
-//             // On React Native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
-//             position: 'absolute',
-//             right: -6,
-//             top: -3,
-//             backgroundColor: 'red',
-//             borderRadius: 6,
-//             width: 12,
-//             height: 12,
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
-//             {badgeCount}
-//           </Text>
-//         </View>
-//       )}
-//     </View>
-//   );
-// }
-
 
 const BACKGROUND_COLOR = '#F2F2F2';
 const Stack = createStackNavigator(); 
@@ -63,12 +39,18 @@ function ProfileStack() {
 
 
 const Tab = createMaterialTopTabNavigator();
-//const Tab = createBottomTabNavigator();
 
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
-
-  if (!isLoadingComplete) {
+  let [fontsLoaded] = useFonts({
+    "Inter-Light": require("./assets/fonts/Inter-Light.otf"),
+    "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
+    "LinzIcons": require("./assets/fonts/icomoon.ttf"),
+    //chelsea market from google fonts
+  });
+  
+  // maybe return <AppLoading /> look into later
+  if (!fontsLoaded || !isLoadingComplete) {
     return null;
   } else {
     return (
@@ -80,17 +62,17 @@ export default function App(props) {
               size = 28;
 
               if (route.name === 'Home') {
-                iconName = focused ? 'ios-shirt' : 'ios-shirt';
+                iconName = focused ? 'linzIcons-11' : 'linzIcons-11';
                 color = focused ? Colors.YELLOW : 'gray';
               } else if (route.name === 'Profile') {
-                iconName = focused ? 'ios-contact' : 'ios-contact';
+                iconName = focused ? 'linzIcons-03' : 'linzIcons-03';
                 color = focused ? Colors.TEAL : 'gray';
               } else if (route.name === 'Messages') {
-                iconName = focused ? 'ios-chatboxes' : 'ios-chatboxes';
+                iconName = focused ? 'linzIcons-06' : 'linzIcons-06';
                 color = focused ? Colors.RED : 'gray';
               }
               // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
+              return <Icon name={iconName} size={size} color={color} />;
             },
           })}
           tabBarOptions={{
@@ -130,6 +112,21 @@ export default function App(props) {
   }
 }
 
+
+function useFonts(fontMap) {
+  let [fontsLoaded, setFontsLoaded] = useState(false);
+  (async () => {
+    await Font.loadAsync(fontMap);
+    setFontsLoaded(true);
+  })();
+  return [fontsLoaded];
+}
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -146,3 +143,36 @@ const styles = StyleSheet.create({
   }
 });
 
+
+
+
+
+
+// TO ADD NOTIFICATIONS FOR THE ICONS (LIKE FOR NEW MESSAGES)
+// function IconWithBadge({ name, badgeCount, color, size }) {
+//   return (
+//     <View style={{ width: 24, height: 24, margin: 5 }}>
+//       <Ionicons name={name} size={size} color={color} />
+//       {badgeCount > 0 && (
+//         <View
+//           style={{
+//             // On React Native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
+//             position: 'absolute',
+//             right: -6,
+//             top: -3,
+//             backgroundColor: 'red',
+//             borderRadius: 6,
+//             width: 12,
+//             height: 12,
+//             justifyContent: 'center',
+//             alignItems: 'center',
+//           }}
+//         >
+//           <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
+//             {badgeCount}
+//           </Text>
+//         </View>
+//       )}
+//     </View>
+//   );
+// }
