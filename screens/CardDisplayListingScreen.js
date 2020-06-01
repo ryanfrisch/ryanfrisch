@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, KeyboardAvoidingView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Picker } from '@react-native-community/picker';
-
 
 // FIXME find a way to not repeat on every page
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../../assets/fonts/config.json';
-const expoAssetId = require('../../assets/fonts/icomoon.ttf');
+import icoMoonConfig from '../assets/fonts/config.json';
+const expoAssetId = require('../assets/fonts/icomoon.ttf');
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
-/* FIXME add real location */
-/* FIXME add real number of listings and changing plural "listing" */
-
-export default function NewListingScreen({ navigation }) {
+export default function CardDisplayListingScreen() {
   // FIXME remove this counter and add a legit onpress action for edit button
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
@@ -28,23 +23,7 @@ export default function NewListingScreen({ navigation }) {
       locations={[0.0, 1.0]}
       style={styles.container}
     >
-      <KeyboardAvoidingView 
-        style={styles.testInput}
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={80}
-      >
-        <TextInput >
-            Add a new listing
-        </TextInput>
-        {/* <Picker
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-        </Picker> */}
-      </KeyboardAvoidingView>
+      
     </LinearGradient>
   );
 }

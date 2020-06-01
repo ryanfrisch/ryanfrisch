@@ -2,20 +2,17 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import React, { useState, useEffect } from "react";
-import { Platform, StatusBar, StyleSheet, View, Text, Dimensions } from 'react-native';
+import React, { useState, } from "react";
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from './constants/Colors';
-import { AppLoading } from "expo";
 
 import * as Font from "expo-font";
-import { Ionicons } from '@expo/vector-icons';
 
 // set up linzi's custom icons
-// FIXME find a way to not repeat on every page
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 import icoMoonConfig from './assets/fonts/config.json';
 const expoAssetId = require('./assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
+export const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
 
 // import {
 //   Inter_900Black,
@@ -26,9 +23,11 @@ import useCachedResources from './hooks/useCachedResources';
 import ProfileScreen from './screens/ProfileScreen';
 import EditProfileScreen from './screens/ProfileStack/EditProfile';
 import NewListingScreen from './screens/ProfileStack/NewListing';
+import ExistingListingScreen from './screens/ProfileStack/ExistingListing';
 import HomeScreen from './screens/HomeScreen';
 import MessageScreen from './screens/MessageScreen';
 import SellingScreen from './screens/MessageStack/SellingScreen';
+import CardDisplayListingScreen from './screens/CardDisplayListingScreen';
 
 const BACKGROUND_COLOR = '#F2F2F2';
 const RED = '#EE2C50';
@@ -43,6 +42,20 @@ function ProfileStack() {
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="NewListing" component={NewListingScreen} />
+      <Stack.Screen name="ExistingListing" component={ExistingListingScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function HomeStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      headerMode='none'
+    > 
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="CardDisplayListing" component={CardDisplayListingScreen} />
+
     </Stack.Navigator>
   );
 }
@@ -85,9 +98,13 @@ export default function App(props) {
 
   let [fontsLoaded] = useFonts({
     "Inter-Light": require("./assets/fonts/Inter-Light.otf"),
+    "Inter-Thin": require("./assets/fonts/Inter-Thin.otf"),
     "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
+    "Inter-Bold": require("./assets/fonts/Inter-Bold.otf"),
     "LinzIcons": require("./assets/fonts/icomoon.ttf"),
-    //chelsea market from google fonts
+    //"Merriweather-Bold": require("./assets/fonts/Merriweather-Bold.ttf"),
+    //"Merriweather-Black": require("./assets/fonts/Merriweather-Black.ttf"),
+
   });
   
   // maybe return <AppLoading /> look into later
@@ -142,7 +159,7 @@ export default function App(props) {
           />
           <Tab.Screen
             name="Home"
-            component={HomeScreen}
+            component={HomeStack}
             //options={{ title: 'Swiper' }}
           />
           <Tab.Screen
@@ -157,7 +174,6 @@ export default function App(props) {
   }
 }
 
-
 function useFonts(fontMap) {
   let [fontsLoaded, setFontsLoaded] = useState(false);
   (async () => {
@@ -166,10 +182,6 @@ function useFonts(fontMap) {
   })();
   return [fontsLoaded];
 }
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -207,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   labelStyle: {
-    fontFamily: 'Inter-Black',
+    fontFamily: 'Inter-Bold',
     fontSize: 15,
   },
 });

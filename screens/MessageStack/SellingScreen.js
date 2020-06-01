@@ -2,93 +2,64 @@ import * as React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../../assets/fonts/config.json';
-const expoAssetId = require('../../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
+import { Icon } from '../../App';
 
 const BACKGROUND_COLOR = '#F2F2F2';
 
-export default function SellingScreen() {
+export default function SellingScreen({ navigation }) {
   return (
     <LinearGradient
       colors={[BACKGROUND_COLOR, '#D1D1D1']}
       locations={[0.0, 1.0]}
       style={styles.container}
-    >
+    > 
       <ScrollView>
         <View style={styles.buyingTab}>
-          <View style={styles.likesContainer}>
-            <Image 
-              source={require('../../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-            <Image 
-              source={require('../../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-            <Image 
-              source={require('../../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-            <Image 
-              source={require('../../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-            <Image 
-              source={require('../../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-          </View>
           <View style={styles.messagesContainer}>
-            <TouchableOpacity style={styles.message}>
-              <Image 
-                source={require('../../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  SELLING SCREEN
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  Hey is this still available?
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.message}>
-              <Image 
-                source={require('../../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  Gucci Dress
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  I can give you $50
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.message}>
-              <Image
-                source={require('../../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  Linzi Bowman
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  Hey is this still available?
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <MessageItem
+              imageSrc={require('../../assets/images/clothingDemos/blackPants.jpg')}
+              listingName={'Nike Golf Pants'}
+              mostRecentMsg={'Yeah, I can go down to $8'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../../assets/images/clothingDemos/pinkTennisSkirt.jpg')}
+              listingName={'Pink Golf Skirt'}
+              mostRecentMsg={'Sorry, but I just sold it'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../../assets/images/clothingDemos/bananaSkirt.jpg')}
+              listingName={'Banana Skirt'}
+              mostRecentMsg={'I got it brand new for $50 but I\'m only asking $15'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            /> 
           </View>
         </View>
       </ScrollView>
     </LinearGradient>
+  );
+}
+
+function MessageItem({ imageSrc, listingName, mostRecentMsg, onPress }) {
+  return (
+    <TouchableOpacity 
+      style={styles.message}
+      onPress={onPress}
+    >
+      <Image
+        source={ imageSrc }
+        style={styles.messageImage}
+      />
+      <View style={styles.textGroup}>
+        <Text style={styles.nameText}>
+          { listingName }
+        </Text>
+        <Text style={styles.mostRecentMessageText}>
+          { mostRecentMsg }
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -173,7 +144,7 @@ const styles = StyleSheet.create({
   nameText: {
     color: 'black',
     fontSize: 20,
-    fontFamily: 'Inter-Black',
+    fontFamily: 'Inter-Bold',
   },
   mostRecentMessageText: {
     color: 'gray',

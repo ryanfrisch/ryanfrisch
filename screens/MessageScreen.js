@@ -2,16 +2,13 @@ import * as React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Icon } from '../App';
 
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../assets/fonts/config.json';
-const expoAssetId = require('../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
+// FIXME IMPLEMENT FLATLIST
 
 const BACKGROUND_COLOR = '#F2F2F2';
 
-export default function MessageScreen() {
+export default function MessageScreen({ navigation }) {
   return (
     <LinearGradient
       colors={[BACKGROUND_COLOR, '#D1D1D1']}
@@ -21,74 +18,82 @@ export default function MessageScreen() {
       <ScrollView>
         <View style={styles.buyingTab}>
           <View style={styles.likesContainer}>
-            <Image 
-              source={require('../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
+            <LikeItem 
+              imageSrc={require('../assets/images/my-profile-image.png')}
+              onPress={() => navigation.navigate('ExistingListing')}
             />
-            <Image 
-              source={require('../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
+            <LikeItem 
+              imageSrc={require('../assets/images/my-profile-image.png')}
+              onPress={() => navigation.navigate('ExistingListing')}
             />
-            <Image 
-              source={require('../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
+            <LikeItem 
+              imageSrc={require('../assets/images/my-profile-image.png')}
+              onPress={() => navigation.navigate('ExistingListing')}
             />
-            <Image 
-              source={require('../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
-            />
-            <Image 
-              source={require('../assets/images/my-profile-image.png')}
-              style={styles.likeImage}
+            <LikeItem 
+              imageSrc={require('../assets/images/my-profile-image.png')}
+              onPress={() => navigation.navigate('ExistingListing')}
             />
           </View>
-          <View style={styles.messagesContainer}>
-            <TouchableOpacity style={styles.message}>
-              <Image 
-                source={require('../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  Patagonia T-Shirt
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  Hey is this still available?
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.message}>
-              <Image 
-                source={require('../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  Gucci Dress
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  I can give you $50
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.message}>
-              <Image
-                source={require('../assets/images/my-profile-image.png')}
-                style={styles.messageImage}
-              />
-              <View style={styles.textGroup}>
-                <Text style={styles.nameText}>
-                  Linzi Bowman
-                </Text>
-                <Text style={styles.mostRecentMessageText}>
-                  Hey is this still available?
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.messagesContainer}>
+          <MessageItem 
+            imageSrc={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
+            listingName={'Long Sleeve T-Shirt'}
+            mostRecentMsg={'Hey is this still available?'}
+            onPress={() => navigation.navigate('ExistingListing')}
+          />
+          <MessageItem 
+            imageSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+            listingName={'Thrasher Crop-Top'}
+            mostRecentMsg={'can i pick this up tonight?'}
+            onPress={() => navigation.navigate('ExistingListing')}
+          />
+          <MessageItem 
+            imageSrc={require('../assets/images/clothingDemos/greenFlowerDress.jpg')}
+            listingName={'Flowery Summer Dress'}
+            mostRecentMsg={'are you flexible on the price?'}
+            onPress={() => navigation.navigate('ExistingListing')}
+          />
+        </View>
         </View>
       </ScrollView>
     </LinearGradient>
+  );
+}
+
+function LikeItem({ imageSrc, onPress }) {
+  return(
+    <TouchableOpacity
+      activeOpacity={.8}
+      onPress={onPress}
+    >
+      <Image 
+        source={imageSrc}
+        style={styles.likeImage}
+      />
+    </TouchableOpacity>
+  )
+}
+
+function MessageItem({ imageSrc, listingName, mostRecentMsg, onPress }) {
+  return (
+    <TouchableOpacity 
+      style={styles.message}
+      onPress={onPress}
+    >
+      <Image
+        source={ imageSrc }
+        style={styles.messageImage}
+      />
+      <View style={styles.textGroup}>
+        <Text style={styles.nameText}>
+          { listingName }
+        </Text>
+        <Text style={styles.mostRecentMessageText}>
+          { mostRecentMsg }
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -100,7 +105,6 @@ const styles = StyleSheet.create({
   },
   buyingTab: {
     flex: 1,
-    
   },
   likesContainer: {
     backgroundColor: '#fbfbfb',
@@ -121,7 +125,6 @@ const styles = StyleSheet.create({
         elevation: 10,
       },
     }),
-    
   },
   likeImage: {
     borderRadius: 10,
@@ -173,7 +176,7 @@ const styles = StyleSheet.create({
   nameText: {
     color: 'black',
     fontSize: 20,
-    fontFamily: 'Inter-Black',
+    fontFamily: 'Inter-Bold',
   },
   mostRecentMessageText: {
     color: 'gray',

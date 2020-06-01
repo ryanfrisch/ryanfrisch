@@ -1,21 +1,31 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Vibration, Share } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Icon } from '../App';
 
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../assets/fonts/config.json';
-const expoAssetId = require('../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
-
-
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
+  // const onShare = async () => {
+  //   try {
+  //     const result = await Share.share({
+  //       message:
+  //         'React Native | A framework for building native apps using React',
+  //     });
+  //     if (result.action === Share.sharedAction) {
+  //       if (result.activityType) {
+  //         // shared with activity type of result.activityType
+  //       } else {
+  //         // shared
+  //       }
+  //     } else if (result.action === Share.dismissedAction) {
+  //       // dismissed
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
 
   return (
     <LinearGradient
@@ -23,26 +33,14 @@ export default function HomeScreen() {
       locations={[0.0, 1.0]}
       style={styles.container}
     >
-      <View style={styles.listingCard}>
-        <Image
-          source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
-          style={styles.listingImage}
-        />
-        <LinearGradient
-          colors={['white', 'white', 'black']}
-          locations={[0.0, 0.7, 1.0]}
-          style={styles.opaqueGradient}
-        >
-        </LinearGradient>
-        <View style={styles.textGroup}>
-          <Text style={styles.bigText}>
-            Thrasher
-          </Text>
-          <Text style={styles.smallText}>
-            $19
-          </Text>
-        </View>
-      </View>
+      <ListingCard
+        onPress={() => navigation.navigate('CardDisplayListing')}
+        imageSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+        size={'S'}
+        title={'Thrasher'}
+        description={'just trying to get rid of it, plz come get it rn'}
+        price={'$19'}
+      />
       <View style={styles.swipeButtons}> 
         <SwipeButton // rewind button
           icon="linzIcons-03"
@@ -72,13 +70,47 @@ export default function HomeScreen() {
           icon="linzIcons-02"
           bigOrSmall='small'
           color='#FDBD1A'
-          onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
+          onPress={onPress} // change to onShare when it gets working
         />
       </View>
     </LinearGradient>
   );
 }
 
+export function ListingCard({ onPress, imageSrc, size, title, description, price }) {
+  return (
+    <TouchableOpacity 
+        style={styles.listingCard}
+        activeOpacity={.8}
+        onPress={onPress}
+      >
+        <Image
+          source={imageSrc}
+          style={styles.listingImage}
+        />
+        <LinearGradient
+          colors={['transparent', 'transparent',  'rgba(0,0,0,.5)', 'rgba(0,0,0,.9)']}
+          locations={[0.0, 0.7, .85, 1.0]}
+          style={styles.opaqueGradient}
+        >
+        </LinearGradient>
+        <Text style={styles.sizeText}>
+            {size}
+        </Text>
+        <View style={styles.textGroup}>
+          <Text style={styles.bigText}>
+            {title}
+          </Text>
+          <Text style={styles.descriptText}>
+            {description}
+          </Text>
+          <Text style={styles.priceText}>
+            {price}
+          </Text>
+        </View>
+      </TouchableOpacity>
+  );
+}
 
 function SwipeButton({ icon, bigOrSmall, onPress, color}) {
   let size;
@@ -91,7 +123,11 @@ function SwipeButton({ icon, bigOrSmall, onPress, color}) {
     buttonStyle = styles.smallButton;
   }
   return (
-    <TouchableOpacity style={buttonStyle} activeOpacity={.6} onPress={onPress}> 
+    <TouchableOpacity 
+      style={buttonStyle} 
+      activeOpacity={.6} 
+      //onPress={Vibration.vibrate(1000)}
+    > 
       <Icon
         style={{ fontFamily: "LinzIcons" }}
         name={icon}
@@ -167,25 +203,47 @@ const styles = StyleSheet.create({
   bigText: {
     position: 'absolute', 
     left: 10,
-    bottom: 0,
+    bottom: 25,
     padding: 5,
     paddingBottom: 0,
     fontSize: 40,
     color: 'white',
     textShadowColor: '#292929',
     textShadowRadius: 6,
-    //fontFamily: 'Baskerville',
-    //fontWeight: 'bold',
-    //fontStyle: 'italic',
+    fontFamily: 'Inter-Black',
+    overflow: 'hidden', //need to add a height or it just goes to next line
+    width: '80%',
   },
-  smallText: {
+  descriptText: {
+    position: 'absolute',
+    left: 20,
+    bottom: 10,
+    fontSize: 16,
+    color: 'white',
+    opacity: 1,
+    textShadowColor: '#292929',
+    textShadowRadius: 6,
+    fontFamily: 'Inter-Light',
+  },
+  priceText: {
     position: 'absolute',
     right: 15,
-    bottom: 10,
-    fontSize: 18,
+    bottom: 35,
+    fontSize: 20,
     color: 'white',
     textShadowColor: '#292929',
     textShadowRadius: 6,
+    fontFamily: 'Inter-Light',
+  },
+  sizeText: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    fontSize: 25,
+    color: 'white',
+    textShadowColor: '#292929',
+    textShadowRadius: 6,
+    fontFamily: 'Inter-Bold',
   },
 
   // BUTTONS

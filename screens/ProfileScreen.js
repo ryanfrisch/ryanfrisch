@@ -2,21 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../assets/fonts/config.json';
-const expoAssetId = require('../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
+import { Icon } from '../App';
 
 /* FIXME add real location */
 /* FIXME add real number of listings and changing plural "listing" */
 
 export default function ProfileScreen({ navigation }) {
-  // FIXME remove this counter and add a legit onpress action for edit button
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
-
   return (
     <LinearGradient
       colors={[BACKGROUND_COLOR, '#D1D1D1']}
@@ -67,17 +58,21 @@ export default function ProfileScreen({ navigation }) {
               />
             </LinearGradient>
           </TouchableOpacity>
-          <Image style={styles.listingThumbnail}
-            source={require('../assets/images/clothingDemos/bananaSkirt.jpg')}
+          <ListingThumbnail
+            imgSrc={require('../assets/images/clothingDemos/bananaSkirt.jpg')}
+            onPress={() => navigation.navigate('ExistingListing')}
           />
-          <Image style={styles.listingThumbnail}
-            source={require('../assets/images/clothingDemos/blackPants.jpg')}
+          <ListingThumbnail
+            imgSrc={require('../assets/images/clothingDemos/blackPants.jpg')}
+            onPress={() => navigation.navigate('ExistingListing')}
           />
-          <Image style={styles.listingThumbnail}
-            source={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
+          <ListingThumbnail
+            imgSrc={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
+            onPress={() => navigation.navigate('ExistingListing')}
           />
-          <Image style={styles.listingThumbnail}
-            source={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+          <ListingThumbnail
+            imgSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+            onPress={() => navigation.navigate('ExistingListing')}
           />
           {/* <Text>
           You have no listings at this time.
@@ -85,6 +80,19 @@ export default function ProfileScreen({ navigation }) {
         </View>      
       </ScrollView>
     </LinearGradient>
+  );
+}
+
+function ListingThumbnail({ imgSrc, onPress}) {
+  return (
+    <TouchableOpacity 
+      onPress={onPress} 
+      activeOpacity={0.7}
+    >
+      <Image style={styles.listingThumbnail}
+        source={imgSrc}
+      />
+    </TouchableOpacity>
   );
 }
 
@@ -96,7 +104,6 @@ export default function ProfileScreen({ navigation }) {
 // <Image source={icon} />;
 
 // style constants
-// const PREFER_BUTTON_CURVE_RADIUS = 20; NO LONGER USED
 const IMAGE_CURVE_RADIUS = 100;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
@@ -157,7 +164,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 30,
     fontWeight: "500",
-    fontFamily: 'Inter-Black'
+    fontFamily: 'Inter-Black',
   },
   profileSubtext: {
     fontFamily: 'Inter-Light',
