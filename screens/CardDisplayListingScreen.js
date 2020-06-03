@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+import { ListingCard } from './HomeScreen';
+import { Icon } from '../App';
 
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../assets/fonts/config.json';
-const expoAssetId = require('../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
-
-export default function CardDisplayListingScreen() {
+export default function CardDisplayListingScreen({ navigation: { goBack } }) {
   // FIXME remove this counter and add a legit onpress action for edit button
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
@@ -18,49 +14,105 @@ export default function CardDisplayListingScreen() {
   //const [selectedValue, setSelectedValue] = useState("java");
 
   return (
-    <LinearGradient
-      colors={[BACKGROUND_COLOR, '#D1D1D1']}
+      <LinearGradient
+      colors={[BACKGROUND_COLOR, '#D5D5D5']}
       locations={[0.0, 1.0]}
       style={styles.container}
     >
-      
+      <ScrollView>
+        <ListingCard
+          onPress={() => goBack()}
+          imageSrc={require('../assets/images/clothingDemos/KOPT/aeModelledGreenDress.jpg')}
+          size={'S'}
+          brand={'AMERICAN EAGLE'}
+          title={'cute sundress!'}
+          description={'just trying to get rid of it, plz come get it rn'}
+          price={'$10'}
+        />
+        <View style={styles.detailCard}>
+        <View style={styles.detailColumn}>
+                  <DetailItem 
+                      iconName={"gender"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"cash"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"filter"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"optionsBars"}
+                      detail={'small'}
+                  />
+              </View>
+              <View style={styles.detailColumn}>
+                  <DetailItem 
+                      iconName={"location"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"share"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"backArrow"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"rewind"}
+                      detail={'small'}
+                  />
+              </View>
+          </View>
+      </ScrollView>
     </LinearGradient>
   );
 }
 
-// Listing Thumbnail system for showing pictures?? 
-// // GOOD
-// var icon = this.props.active
-//   ? require('./my-icon-active.png')
-//   : require('./my-icon-inactive.png');
-// <Image source={icon} />;
+function DetailItem({ iconName, color, detail}) {
+  color = 'black';
+  //const [value, onChangeText] = React.useState('Useless Placeholder');
+  
+  return (
+    <View style={styles.detailItem}> 
+      <Icon
+          style={styles.detailIcon}
+          name={iconName}
+          size='40'
+          color={color}
+      />
 
-// style constants
-// const PREFER_BUTTON_CURVE_RADIUS = 20; NO LONGER USED
-const IMAGE_CURVE_RADIUS = 100;
+      <Text style={styles.detailText}>
+        {detail}
+      </Text>
+    </View>
+  );
+}
+
+// styles below
+const BACKGROUND_COLOR = '#F2F2F2';
+const BUTTON_W_H = 65;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
 const RED = '#EE2C50';
 const YELLOW = '#FDBD1A';
-const BACKGROUND_COLOR = '#F2F2F2';
 
 const styles = StyleSheet.create({
-  testInput: {
-    position: 'absolute',
-    //backgroundColor: 'black',
-    bottom: 0,
-  },
   container: {
-    flex: 1,
-    backgroundColor: BACKGROUND_COLOR,
-    alignItems: "stretch",
+      flexDirection: 'column',
+      flex: 1,
+      backgroundColor: BACKGROUND_COLOR,
+      alignItems: "stretch",
   },
-  // profile image styling
-  profileCard: {
+  detailCard: {
+    flexDirection: "row",
     backgroundColor: '#fbfbfb',
     padding: 20,
-    margin: 15,
-    marginTop: 10,
+    margin: 10,
+    marginTop: 25,
     marginBottom: 10,
     alignItems: "center",
     borderRadius: 12,    
@@ -76,37 +128,28 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  editButton: {
-    //backgroundColor: "#D7D7D7",
-    alignSelf: 'flex-end',
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 7,
+  detailColumn: {
+    flex: 1,
   },
-  imageAndNameContainer: {
-    alignItems: 'center',
-    marginBottom: 10,
-    marginTop: -10,
+  detailItem: {
+    flexDirection: "row",
+    //backgroundColor: 'black',
+    width: '100%',
   },
-  profileImage: {
-    height: 200,
-    width: 200,
-    overflow: 'hidden',
-    borderColor: "#ECECEC",
-    borderWidth: 7,
-    borderRadius: IMAGE_CURVE_RADIUS,
+  detailIcon: {
+    fontFamily: "LinzIcons",
   },
-  profileText: {
-    marginTop: 5,
-    color: 'black',
-    fontSize: 30,
-    fontWeight: "500",
-    fontFamily: 'Inter-Black'
-  },
-  profileSubtext: {
+  detailText: {
     fontFamily: 'Inter-Light',
-    fontSize: 15,
+    fontSize: 16,
+    color: 'black',
+    //backgroundColor: '#E8E8E8',
+    //borderRadius: 7,
+    marginTop: 5,
+    marginBottom: 7,
+    padding: 2,
+    paddingHorizontal: 6,
+
   },
 });
 

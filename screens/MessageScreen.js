@@ -19,44 +19,72 @@ export default function MessageScreen({ navigation }) {
         <View style={styles.buyingTab}>
           <View style={styles.likesContainer}>
             <LikeItem 
-              imageSrc={require('../assets/images/my-profile-image.png')}
+              imageSrc={require('../assets/images/clothingDemos/KOPT/nikePinkShorts.jpg')}
               onPress={() => navigation.navigate('ExistingListing')}
             />
             <LikeItem 
-              imageSrc={require('../assets/images/my-profile-image.png')}
+              imageSrc={require('../assets/images/clothingDemos/KOPT/aePurpleTop.jpg')}
               onPress={() => navigation.navigate('ExistingListing')}
             />
             <LikeItem 
-              imageSrc={require('../assets/images/my-profile-image.png')}
+              imageSrc={require('../assets/images/clothingDemos/KOPT/aeSwimsuit.jpg')}
               onPress={() => navigation.navigate('ExistingListing')}
             />
             <LikeItem 
-              imageSrc={require('../assets/images/my-profile-image.png')}
+              imageSrc={require('../assets/images/clothingDemos/KOPT/patagoniaJacket.jpg')}
               onPress={() => navigation.navigate('ExistingListing')}
             />
           </View>
-        <View style={styles.messagesContainer}>
-          <MessageItem 
-            imageSrc={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
-            listingName={'Long Sleeve T-Shirt'}
-            mostRecentMsg={'Hey is this still available?'}
-            onPress={() => navigation.navigate('ExistingListing')}
-          />
-          <MessageItem 
-            imageSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
-            listingName={'Thrasher Crop-Top'}
-            mostRecentMsg={'can i pick this up tonight?'}
-            onPress={() => navigation.navigate('ExistingListing')}
-          />
-          <MessageItem 
-            imageSrc={require('../assets/images/clothingDemos/greenFlowerDress.jpg')}
-            listingName={'Flowery Summer Dress'}
-            mostRecentMsg={'are you flexible on the price?'}
-            onPress={() => navigation.navigate('ExistingListing')}
-          />
+          
+          <View style={styles.messagesContainer}>
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/luluLeggings.jpg')}
+              listingName={'Lulu Leggings'}
+              mostRecentMsg={'Hey is this still available?'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/northFaceHoodie.jpg')}
+              listingName={'North Face Sweatshirt'}
+              mostRecentMsg={'can i pick this up tonight?'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/vansSweatshirt.jpg')}
+              listingName={'Vans Sweatshirt'}
+              mostRecentMsg={'Sorry, but I just sold it'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/patagoniaShorts.jpg')}
+              listingName={'Patagonia Shorts'}
+              mostRecentMsg={'I can come right now to grab it!'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/jeanShorts.jpg')}
+              listingName={'American Eagle Shorts'}
+              mostRecentMsg={'let\'s meet at the corner of University...'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+            <MessageItem 
+              imageSrc={require('../assets/images/clothingDemos/KOPT/luluShorts.jpg')}
+              listingName={'Lululemon Shorts'}
+              mostRecentMsg={'I can offer $20'}
+              onPress={() => navigation.navigate('ExistingListing')}
+            />
+          </View>
         </View>
-        </View>
+        {/* <TouchableOpacity style={styles.goToSwipeButton} onPress={() => navigation.navigate('HomeScreen')}>
+          <Icon
+            style={{ fontFamily: "LinzIcons" }}
+            name={'backArrow'}
+            size={'40'}
+            color={'#EE2C50'}
+          />
+        </TouchableOpacity>  FIX SO IT OVERLAYS*/}
       </ScrollView>
+  
     </LinearGradient>
   );
 }
@@ -97,6 +125,8 @@ function MessageItem({ imageSrc, listingName, mostRecentMsg, onPress }) {
   );
 }
 
+const BUTTON_W_H = 65;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -105,6 +135,30 @@ const styles = StyleSheet.create({
   },
   buyingTab: {
     flex: 1,
+  },
+  goToSwipeButton: {
+    // position: 'absolute',
+    // bottom: 15,
+    // left: 10,
+    backgroundColor: 'white',
+    height: BUTTON_W_H,
+    width: BUTTON_W_H,
+    borderRadius: BUTTON_W_H * .5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 6,
+    marginRight: 6,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#292929',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
   },
   likesContainer: {
     backgroundColor: '#fbfbfb',

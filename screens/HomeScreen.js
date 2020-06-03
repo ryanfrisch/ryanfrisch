@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Vibration, Share } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Dimensions, Vibration, Share } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from '../App';
 
@@ -35,39 +35,40 @@ export default function HomeScreen({ navigation }) {
     >
       <ListingCard
         onPress={() => navigation.navigate('CardDisplayListing')}
-        imageSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+        imageSrc={require('../assets/images/clothingDemos/KOPT/aeModelledGreenDress.jpg')}
         size={'S'}
-        title={'Thrasher'}
+        brand={'american eagle'}
+        title={'cute sundress!'}
         description={'just trying to get rid of it, plz come get it rn'}
         price={'$19'}
       />
       <View style={styles.swipeButtons}> 
         <SwipeButton // rewind button
-          icon="linzIcons-03"
+          icon="rewind"
           bigOrSmall='small'
           color='#661DCE'
           onPress={onPress}
         />
         <SwipeButton // trash button
-          icon="linzIcons-05"
+          icon="trash"
           bigOrSmall='big'
           color='#4EE2C6'
           onPress={onPress}
         />
         <SwipeButton // instaMessage button
-          icon="linzIcons-02"
+          icon="instaMessage"
           bigOrSmall='small'
           color='#FDBD1A'
           onPress={onPress}
         />
         <SwipeButton // heart button
-          icon="linzIcons-08"
+          icon="heart"
           bigOrSmall='big'
           color='#EE2C50'
           onPress={onPress}
         />
         <SwipeButton // share button
-          icon="linzIcons-02"
+          icon="share"
           bigOrSmall='small'
           color='#FDBD1A'
           onPress={onPress} // change to onShare when it gets working
@@ -77,7 +78,7 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
-export function ListingCard({ onPress, imageSrc, size, title, description, price }) {
+export function ListingCard({ onPress, imageSrc, size, brand, title, description, price }) {
   return (
     <TouchableOpacity 
         style={styles.listingCard}
@@ -89,7 +90,7 @@ export function ListingCard({ onPress, imageSrc, size, title, description, price
           style={styles.listingImage}
         />
         <LinearGradient
-          colors={['transparent', 'transparent',  'rgba(0,0,0,.5)', 'rgba(0,0,0,.9)']}
+          colors={['transparent', 'transparent',  'rgba(0,0,0,.6)', 'rgba(0,0,0,1)']}
           locations={[0.0, 0.7, .85, 1.0]}
           style={styles.opaqueGradient}
         >
@@ -98,6 +99,9 @@ export function ListingCard({ onPress, imageSrc, size, title, description, price
             {size}
         </Text>
         <View style={styles.textGroup}>
+          <Text style={styles.brandText}>
+            {brand}
+          </Text>
           <Text style={styles.bigText}>
             {title}
           </Text>
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
   },
 
   listingCard: {
-    flex: 5,
+    height: Dimensions.get('window').height * (.75),
     backgroundColor: '#fbfbfb',
     margin: 10,
     marginBottom: 0,
@@ -196,9 +200,20 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingTop: 0,
     width: '100%',
-    //justifyContent: 'space-between',
-    //alignItems: "center",
-    // fontFamily: '', HANDWRITTEN FONT FOR POLAROID LOOK
+  },
+  brandText: {
+    position: 'absolute', 
+    left: 15,
+    bottom: 63,
+    padding: 3,
+    fontSize: 13,
+    color: YELLOW,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    fontFamily: 'Inter-Black',
+    textTransform: 'uppercase',
+    borderBottomLeftRadius: 5,
+    overflow: 'hidden',
   },
   bigText: {
     position: 'absolute', 
@@ -206,13 +221,11 @@ const styles = StyleSheet.create({
     bottom: 25,
     padding: 5,
     paddingBottom: 0,
-    fontSize: 40,
+    fontSize: 35,
     color: 'white',
-    textShadowColor: '#292929',
-    textShadowRadius: 6,
     fontFamily: 'Inter-Black',
     overflow: 'hidden', //need to add a height or it just goes to next line
-    width: '80%',
+    width: '93%',
   },
   descriptText: {
     position: 'absolute',
@@ -221,8 +234,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     opacity: 1,
-    textShadowColor: '#292929',
-    textShadowRadius: 6,
     fontFamily: 'Inter-Light',
   },
   priceText: {
@@ -231,8 +242,6 @@ const styles = StyleSheet.create({
     bottom: 35,
     fontSize: 20,
     color: 'white',
-    textShadowColor: '#292929',
-    textShadowRadius: 6,
     fontFamily: 'Inter-Light',
   },
   sizeText: {
@@ -241,8 +250,7 @@ const styles = StyleSheet.create({
     right: 20,
     fontSize: 25,
     color: 'white',
-    textShadowColor: '#292929',
-    textShadowRadius: 6,
+
     fontFamily: 'Inter-Bold',
   },
 
@@ -253,17 +261,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     marginTop: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#292929',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
   },
   bigButton: {
     backgroundColor: 'white',

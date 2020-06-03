@@ -9,10 +9,6 @@ import { Icon } from '../../App';
 /* FIXME add real number of listings and changing plural "listing" */
 
 export default function EditProfile({ navigation: { goBack } }) {
-  // FIXME remove this counter and add a legit onpress action for edit button
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
-
   return (
     <LinearGradient
       colors={[BACKGROUND_COLOR, '#D1D1D1']}
@@ -24,7 +20,7 @@ export default function EditProfile({ navigation: { goBack } }) {
         keyboardVerticalOffset={70}
       >
         <ScrollView>   
-            <View style={styles.profileCard}>
+          <View style={styles.profileCard}>
             <TouchableOpacity 
                 style={styles.editButton}
                 onPress={() => goBack()}
@@ -32,95 +28,94 @@ export default function EditProfile({ navigation: { goBack } }) {
             >
                 <Icon
                 style={{ fontFamily: "LinzIcons" }}
-                name='linzIcons-07'
+                name='backArrow'
                 size='30'
                 color='black'
                 />
             </TouchableOpacity>
             <View style={styles.imageAndNameContainer}>
-                <TouchableOpacity style={styles.imageContainter} activeOpacity={.6}>
-                    <Image 
-                        style={styles.profileImage}
-                        source={require('../../assets/images/my-profile-image.png')}
-                    />
-                    <LinearGradient
-                        colors={['transparent', 'rgba(0,0,0,1)']}
-                        locations={[0.0, 1.0]}
-                        style={styles.opaqueGradient}
-                    >
-                    </LinearGradient>
-                    <Icon
-                        style={styles.pictureIcon}
-                        name='linzIcons-11'
-                        size='50'
-                        color='white'
-                    />
-                </TouchableOpacity>
-                <TextInput 
-                    style={styles.editProfileText}
-                    autoCapitalize="none"
-                    autoCompleteType="name"
-                    maxLength="25"
-                    // clearButtonMode="while-editing" kind of bulky maybe useful?
-                    // caretHidden="false" default mode
-                    // clearTextOnFocus="true" clears the text field when tapped
-                    // defaultValue="Enter name here" useful for intro sequence
-                    // keyboardType="number-pad" useful for email and phone number etc.
+              <TouchableOpacity style={styles.imageContainter} activeOpacity={.6}>
+                <Image 
+                    style={styles.profileImage}
+                    source={require('../../assets/images/profileImage.jpg')}
+                />
+                <LinearGradient
+                    colors={['transparent', 'rgba(0,0,0,1)']}
+                    locations={[0.0, 1.0]}
+                    style={styles.opaqueGradient}
+                >
+                </LinearGradient>
+                <Icon
+                    style={styles.pictureIcon}
+                    name='image'
+                    size='50'
+                    color='white'
+                />
+              </TouchableOpacity>
+              <TextInput 
+                  style={styles.editProfileText}
+                  autoCapitalize="none"
+                  autoCompleteType="name"
+                  maxLength="25"
+                  // clearButtonMode="while-editing" kind of bulky maybe useful?
+                  // caretHidden="false" default mode
+                  // clearTextOnFocus="true" clears the text field when tapped
+                  // defaultValue="Enter name here" useful for intro sequence
+                  // keyboardType="number-pad" useful for email and phone number etc.
 
                 >
-                    Ryan Frisch
-                </TextInput>
-                <Text style={styles.editProfileSubtext}>Provo, UT</Text> 
-                <Text style={styles.editProfileSubtext}>0 Listings</Text> 
-                
+                  Linzi Bowman
+              </TextInput>
+              <Text style={styles.editProfileSubtext}>Provo, UT</Text> 
+              <Text style={styles.editProfileSubtext}>0 Listings</Text> 
             </View>
-            </View>
-            <View style={styles.prefCard}>
-                <View style={styles.prefColumn}>
-                    <PrefItem 
-                        iconName={"linzIcons-01"}
-                        defaultValue={"male"}
-                        placeholder={'gender'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-02"}
-                        defaultValue={"medium"}
-                        placeholder={'t-shirt size'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-03"}
-                        defaultValue={"medium"}
-                        placeholder={'waist-size'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-04"}
-                        defaultValue={"10\""}
-                        placeholder={'shorts inline length'}
-                    />
-                </View>
-                <View style={styles.prefColumn}>
-                    <PrefItem 
-                        iconName={"linzIcons-05"}
-                        defaultValue={"male"}
-                        placeholder={'gender'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-06"}
-                        defaultValue={"male"}
-                        placeholder={'gender'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-07"}
-                        defaultValue={"male"}
-                        placeholder={'gender'}
-                    />
-                    <PrefItem 
-                        iconName={"linzIcons-08"}
-                        defaultValue={"male"}
-                        placeholder={'gender'}
-                    />
-                </View>
-            </View>
+          </View>
+          <View style={styles.prefCard}>
+              <View style={styles.prefColumn}>
+                  <PrefItem 
+                      iconName={"gender"}
+                      defaultValue={"female"}
+                      placeholder={'gender'}
+                  />
+                  <PrefItem 
+                      iconName={"cash"}
+                      defaultValue={"small"}
+                      placeholder={'tops'}
+                  />
+                  <PrefItem 
+                      iconName={"filter"}
+                      defaultValue={"small"}
+                      placeholder={'dresses'}
+                  />
+                  <PrefItem 
+                      iconName={"optionsBars"}
+                      defaultValue={"10\""}
+                      placeholder={'shorts inline length'}
+                  />
+              </View>
+              <View style={styles.prefColumn}>
+                  <PrefItem 
+                      iconName={"location"}
+                      defaultValue={"medium"}
+                      placeholder={'gender'}
+                  />
+                  <PrefItem 
+                      iconName={"share"}
+                      defaultValue={"4"}
+                      placeholder={'gender'}
+                  />
+                  <PrefItem 
+                      iconName={"backArrow"}
+                      defaultValue={"8"}
+                      placeholder={'shoe size'}
+                  />
+                  <PrefItem 
+                      iconName={"rewind"}
+                      defaultValue={"B"}
+                      placeholder={'bra size'}
+                  />
+              </View>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </LinearGradient>

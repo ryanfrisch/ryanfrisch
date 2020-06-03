@@ -97,10 +97,12 @@ export default function App(props) {
   //const isLoadingComplete = useCachedResources();
 
   let [fontsLoaded] = useFonts({
-    "Inter-Light": require("./assets/fonts/Inter-Light.otf"),
     "Inter-Thin": require("./assets/fonts/Inter-Thin.otf"),
-    "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
+    "Inter-Light": require("./assets/fonts/Inter-Light.otf"),
+    "Inter-Medium": require("./assets/fonts/Inter-Medium.otf"),
     "Inter-Bold": require("./assets/fonts/Inter-Bold.otf"),
+    "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
+
     "LinzIcons": require("./assets/fonts/icomoon.ttf"),
     //"Merriweather-Bold": require("./assets/fonts/Merriweather-Bold.ttf"),
     //"Merriweather-Black": require("./assets/fonts/Merriweather-Black.ttf"),
@@ -120,14 +122,14 @@ export default function App(props) {
               let iconName;
               
 
-              if (route.name === 'Home') {
-                iconName = focused ? 'linzIcons-11' : 'linzIcons-11';
-                color = focused ? Colors.YELLOW : 'gray';
-              } else if (route.name === 'Profile') {
-                iconName = focused ? 'linzIcons-03' : 'linzIcons-03';
+              if (route.name === 'Profile') {
+                iconName = 'female';
                 color = focused ? Colors.TEAL : 'gray';
+              } else if (route.name === 'Home') {
+                iconName = 'socks';
+                color = focused ? Colors.YELLOW : 'gray';
               } else if (route.name === 'Messages') {
-                iconName = focused ? 'linzIcons-06' : 'linzIcons-06';
+                iconName = 'message';
                 color = focused ? Colors.RED : 'gray';
               }
               // You can return any component that you like here!

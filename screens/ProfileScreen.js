@@ -23,7 +23,7 @@ export default function ProfileScreen({ navigation }) {
           >
             <Icon
               style={{ fontFamily: "LinzIcons" }}
-              name='linzIcons-07'
+              name='thickEdit'
               size='30'
               color='black'
             />
@@ -31,9 +31,9 @@ export default function ProfileScreen({ navigation }) {
           <View style={styles.imageAndNameContainer}>
             <Image 
               style={styles.profileImage}
-              source={require('../assets/images/my-profile-image.png')}
+              source={require('../assets/images/profileImage.jpg')}
             />
-            <Text style={styles.profileText}>Ryan Frisch</Text>
+            <Text style={styles.profileText}>Linzi Bowman</Text>
             <Text style={styles.profileSubtext}>Provo, UT</Text> 
             <Text style={styles.profileSubtext}>0 Listings</Text> 
             
@@ -52,26 +52,26 @@ export default function ProfileScreen({ navigation }) {
             >
               <Icon
                 style={{ fontFamily: "LinzIcons" }}
-                name='linzIcons-01'
+                name='add'
                 size='60'
                 color='white'
               />
             </LinearGradient>
           </TouchableOpacity>
           <ListingThumbnail
-            imgSrc={require('../assets/images/clothingDemos/bananaSkirt.jpg')}
+            imgSrc={require('../assets/images/clothingDemos/KOPT/aeOveralls.jpg')}
             onPress={() => navigation.navigate('ExistingListing')}
           />
           <ListingThumbnail
-            imgSrc={require('../assets/images/clothingDemos/blackPants.jpg')}
+            imgSrc={require('../assets/images/clothingDemos/KOPT/aeRippedBlueJeans.jpg')}
             onPress={() => navigation.navigate('ExistingListing')}
           />
           <ListingThumbnail
-            imgSrc={require('../assets/images/clothingDemos/stripedLongSleeve.jpg')}
+            imgSrc={require('../assets/images/clothingDemos/KOPT/aePurpleTop.jpg')}
             onPress={() => navigation.navigate('ExistingListing')}
           />
           <ListingThumbnail
-            imgSrc={require('../assets/images/clothingDemos/thrasherCrop.jpg')}
+            imgSrc={require('../assets/images/clothingDemos/KOPT/aeOrangeTop.jpg')}
             onPress={() => navigation.navigate('ExistingListing')}
           />
           {/* <Text>

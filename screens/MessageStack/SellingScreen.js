@@ -17,21 +17,21 @@ export default function SellingScreen({ navigation }) {
         <View style={styles.buyingTab}>
           <View style={styles.messagesContainer}>
             <MessageItem
-              imageSrc={require('../../assets/images/clothingDemos/blackPants.jpg')}
-              listingName={'Nike Golf Pants'}
+              imageSrc={require('../../assets/images/clothingDemos/KOPT/aeRippedBlueJeans.jpg')}
+              listingName={'Anna'}
               mostRecentMsg={'Yeah, I can go down to $8'}
               onPress={() => navigation.navigate('ExistingListing')}
             />
             <MessageItem 
-              imageSrc={require('../../assets/images/clothingDemos/pinkTennisSkirt.jpg')}
-              listingName={'Pink Golf Skirt'}
+              imageSrc={require('../../assets/images/clothingDemos/KOPT/aeOveralls.jpg')}
+              listingName={'Julia'}
               mostRecentMsg={'Sorry, but I just sold it'}
               onPress={() => navigation.navigate('ExistingListing')}
             />
             <MessageItem 
-              imageSrc={require('../../assets/images/clothingDemos/bananaSkirt.jpg')}
-              listingName={'Banana Skirt'}
-              mostRecentMsg={'I got it brand new for $50 but I\'m only asking $15'}
+              imageSrc={require('../../assets/images/clothingDemos/KOPT/aeOveralls.jpg')}
+              listingName={'Kim'}
+              mostRecentMsg={'Yeah, you can pick it up tonight!'}
               onPress={() => navigation.navigate('ExistingListing')}
             /> 
           </View>

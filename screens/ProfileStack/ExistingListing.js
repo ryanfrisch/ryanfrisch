@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ListingCard } from '../HomeScreen';
 import { Icon } from '../../App';
 
-export default function ExistingListingScreen({ navigation }) {
+export default function ExistingListingScreen({ navigation: { goBack } }) {
   // FIXME remove this counter and add a legit onpress action for edit button
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
@@ -14,131 +14,143 @@ export default function ExistingListingScreen({ navigation }) {
   //const [selectedValue, setSelectedValue] = useState("java");
 
   return (
-    <LinearGradient
-      colors={[BACKGROUND_COLOR, '#D1D1D1']}
+      <LinearGradient
+      colors={[BACKGROUND_COLOR, '#D5D5D5']}
       locations={[0.0, 1.0]}
       style={styles.container}
     >
-      <ListingCard
-        onPress={onPress}
-        imageSrc={require('../../assets/images/clothingDemos/thrasherCrop.jpg')}
-        size={'S'}
-        title={'Thrasher'}
-        description={'just trying to get rid of it, plz come get it rn'}
-        price={'$19'}
-      />
-      
+      <ScrollView>
+        <ListingCard
+          onPress={() => goBack()}
+          imageSrc={require('../../assets/images/clothingDemos/KOPT/aeOveralls.jpg')}
+          size={'S'}
+          brand={'AMERICAN EAGLE'}
+          title={'sad to let go'}
+          description={'i love these overalls but i need the money'}
+          price={'$10'}
+        />
+        <View style={styles.detailCard}>
+        <View style={styles.detailColumn}>
+                  <DetailItem 
+                      iconName={"gender"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"cash"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"filter"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"optionsBars"}
+                      detail={'small'}
+                  />
+              </View>
+              <View style={styles.detailColumn}>
+                  <DetailItem 
+                      iconName={"location"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"share"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"backArrow"}
+                      detail={'small'}
+                  />
+                  <DetailItem 
+                      iconName={"rewind"}
+                      detail={'small'}
+                  />
+              </View>
+          </View>
+      </ScrollView>
     </LinearGradient>
   );
 }
 
+function DetailItem({ iconName, color, detail}) {
+  color = 'black';
+  //const [value, onChangeText] = React.useState('Useless Placeholder');
+  
+  return (
+    <View style={styles.detailItem}> 
+      <Icon
+          style={styles.detailIcon}
+          name={iconName}
+          size='40'
+          color={color}
+      />
 
-// Listing Thumbnail system for showing pictures?? 
-// // GOOD
-// var icon = this.props.active
-//   ? require('./my-icon-active.png')
-//   : require('./my-icon-inactive.png');
-// <Image source={icon} />;
+      <Text style={styles.detailText}>
+        {detail}
+      </Text>
+    </View>
+  );
+}
 
-// style constants
-// const PREFER_BUTTON_CURVE_RADIUS = 20; NO LONGER USED
-const IMAGE_CURVE_RADIUS = 100;
+// styles below
+const BACKGROUND_COLOR = '#F2F2F2';
+const BUTTON_W_H = 65;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';
 const RED = '#EE2C50';
 const YELLOW = '#FDBD1A';
-const BACKGROUND_COLOR = '#F2F2F2';
 
 const styles = StyleSheet.create({
-    listingCard: {
-        flex: 5,
-        backgroundColor: '#fbfbfb',
-        margin: 10,
-        marginBottom: 0,
-        borderRadius: 12,    
-        ...Platform.select({
-          ios: {
-            shadowColor: 'black',
-            shadowOffset: { width: 0, height: 0 },
-            shadowOpacity: 0.1,
-            shadowRadius: 6,
-          },
-          android: {
-            elevation: 20,
-          },
-        }),
+  container: {
+      flexDirection: 'column',
+      flex: 1,
+      backgroundColor: BACKGROUND_COLOR,
+      alignItems: "stretch",
+  },
+  detailCard: {
+    flexDirection: "row",
+    backgroundColor: '#fbfbfb',
+    padding: 20,
+    margin: 10,
+    marginTop: 25,
+    marginBottom: 10,
+    alignItems: "center",
+    borderRadius: 12,    
+    ...Platform.select({
+      ios: {
+        shadowColor: '#292929',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
       },
-      listingImage: {
-        borderRadius: 12,
-        //resizeMode: 'contain',
-        height: '100%',
-        width: '100%',
+      android: {
+        elevation: 10,
       },
-      opaqueGradient: {
-        position: 'absolute',
-        bottom: 0,
-        padding: 12,
-        paddingTop: 0,
-        width: '100%',
-        height: '100%',
-        opacity: .3,
-        borderRadius: 12,
-      },
-      textGroup: {
-        position: 'absolute',
-        bottom: 10,
-        padding: 12,
-        paddingTop: 0,
-        width: '100%',
-        //justifyContent: 'space-between',
-        //alignItems: "center",
-        // fontFamily: '', HANDWRITTEN FONT FOR POLAROID LOOK
-      },
-      bigText: {
-        position: 'absolute', 
-        left: 10,
-        bottom: 25,
-        padding: 5,
-        paddingBottom: 0,
-        fontSize: 40,
-        color: 'white',
-        textShadowColor: '#292929',
-        textShadowRadius: 6,
-        fontFamily: 'Inter-Black',
-        overflow: 'hidden', //need to add a height or it just goes to next line
-        width: '80%',
-      },
-      descriptText: {
-        position: 'absolute',
-        left: 20,
-        bottom: 10,
-        fontSize: 16,
-        color: 'white',
-        opacity: 1,
-        textShadowColor: '#292929',
-        textShadowRadius: 6,
-        fontFamily: 'Inter-Light',
-      },
-      priceText: {
-        position: 'absolute',
-        right: 15,
-        bottom: 35,
-        fontSize: 20,
-        color: 'white',
-        textShadowColor: '#292929',
-        textShadowRadius: 6,
-        fontFamily: 'Inter-Light',
-      },
-      sizeText: {
-        position: 'absolute',
-        top: 20,
-        right: 20,
-        fontSize: 25,
-        color: 'white',
-        textShadowColor: '#292929',
-        textShadowRadius: 6,
-        fontFamily: 'Inter-Bold',
-      },
+    }),
+  },
+  detailColumn: {
+    flex: 1,
+  },
+  detailItem: {
+    flexDirection: "row",
+    //backgroundColor: 'black',
+    width: '100%',
+  },
+  detailIcon: {
+    fontFamily: "LinzIcons",
+  },
+  detailText: {
+    fontFamily: 'Inter-Light',
+    fontSize: 16,
+    color: 'black',
+    //backgroundColor: '#E8E8E8',
+    //borderRadius: 7,
+    marginTop: 5,
+    marginBottom: 7,
+    padding: 2,
+    paddingHorizontal: 6,
+
+  },
 });
 
 //Use the following for sequences (aka intro sequence or new listing sequence)
