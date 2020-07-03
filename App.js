@@ -65,7 +65,7 @@ function MessageStack() {
     <Tab.Navigator
       tabBarOptions={{
         showLabel: true,
-        labelStyle: styles.labelStyle,
+        labelStyle: styles.messagesLabelStyle,
         showIcon: false,
         pressOpacity: .6,
         activeTintColor: 'black',
@@ -120,7 +120,7 @@ export default function App(props) {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-              
+             //size = 25;
 
               if (route.name === 'Profile') {
                 iconName = 'female';
@@ -133,7 +133,7 @@ export default function App(props) {
                 color = focused ? Colors.RED : 'gray';
               }
               // You can return any component that you like here!
-              return <Icon style={styles.iconStyle} name={iconName} color={color} />;
+              return <Icon style={styles.iconStyle} name={iconName} color={color} size={size}/>;
             },
           })}
           tabBarOptions={{
@@ -142,6 +142,8 @@ export default function App(props) {
             pressOpacity: .6,
             style: styles.tabBarStyle,
             tabStyle: styles.tabStyle,
+            contentContainerStyle: styles.contentContainerStyle,
+            labelStyle: styles.mainTabsLabelStyle,
             indicatorStyle: { backgroundColor: BACKGROUND_COLOR },
             scrollEnabled: false, // true would allow the icons to move to center as its activated
             iconStyle: styles.iconStyle,
@@ -193,12 +195,13 @@ const styles = StyleSheet.create({
   },
   tabBarStyle: {
     backgroundColor: BACKGROUND_COLOR,
-    shadowColor: BACKGROUND_COLOR,
+    shadowOpacity: 0,
+    //shadowColor: BACKGROUND_COLOR,
     elevation: 0,
     //height: 60,
     marginTop: 0,
-    paddingTop: 10,    
-    paddingBottom: 10,
+    paddingTop: 20,    
+    paddingBottom: 0,
   },
   tabStyle: {
     paddingTop: 5,
@@ -209,10 +212,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconStyle: {
-    fontSize: 25,
-    margin: 0,
+    width: 32,
+    height: 32,
+    fontSize: 32,
   },
-  
+  // mainTabsLabelStyle : {
+  //   opacity: 0,
+  //   backgroundColor: 'black',
+  // },
+  // contentContainerStyle: {
+  //   opacity: 0,
+  //   backgroundColor: 'black',
+  // },
+
+  // MESSAGES TAB NAVIGATION STYLING
   messageTabBarStyle: {
     backgroundColor: BACKGROUND_COLOR,
     shadowColor: BACKGROUND_COLOR,
@@ -220,10 +233,11 @@ const styles = StyleSheet.create({
     //height: 60,
     marginTop: -10,
   },
-  labelStyle: {
+  messagesLabelStyle: {
     fontFamily: 'Inter-Bold',
     fontSize: 15,
   },
+  
 });
 
 

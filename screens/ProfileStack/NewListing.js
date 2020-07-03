@@ -3,61 +3,46 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, KeyboardAvoidingView, 
 import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Picker } from '@react-native-community/picker';
+import CardStack, { Card } from 'react-native-card-stack-swiper';
 
 
-// FIXME find a way to not repeat on every page
-import { createIconSetFromIcoMoon } from '@expo/vector-icons';
-import icoMoonConfig from '../../assets/fonts/config.json';
-const expoAssetId = require('../../assets/fonts/icomoon.ttf');
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'LinzIcons', expoAssetId);
-
-/* FIXME add real location */
-/* FIXME add real number of listings and changing plural "listing" */
-
-export default function NewListingScreen({ navigation }) {
-  // FIXME remove this counter and add a legit onpress action for edit button
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
-  
+export default function NewListingScreen({ navigation }) {  
   // for picker 
   //const [selectedValue, setSelectedValue] = useState("java");
 
   return (
-    <LinearGradient
-      colors={[BACKGROUND_COLOR, '#D1D1D1']}
-      locations={[0.0, 1.0]}
-      style={styles.container}
-    >
-      <KeyboardAvoidingView 
-        style={styles.testInput}
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={80}
-      >
-        <TextInput >
-            Add a new listing
-        </TextInput>
-        {/* <Picker
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-        </Picker> */}
-      </KeyboardAvoidingView>
-    </LinearGradient>
+    <CardStack style={styles.content} ref={swiper => { this.swiper = swiper }}>
+      <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
+      <Card style={[styles.card, styles.card2]}><Text style={styles.label}>B</Text></Card>
+      <Card style={[styles.card, styles.card1]}><Text style={styles.label}>C</Text></Card>
+    </CardStack>
+    // <LinearGradient
+    //   colors={[BACKGROUND_COLOR, '#D1D1D1']}
+    //   locations={[0.0, 1.0]}
+    //   style={styles.container}
+    // >
+    //   <KeyboardAvoidingView 
+    //     style={styles.testInput}
+    //     behavior={Platform.OS == "ios" ? "padding" : "height"}
+    //     keyboardVerticalOffset={80}
+    //   >
+    //     <TextInput >
+    //         Add a new listing
+    //     </TextInput>
+    //     {/* <Picker
+    //         selectedValue={selectedValue}
+    //         style={{ height: 50, width: 150 }}
+    //         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+    //     >
+    //         <Picker.Item label="Java" value="java" />
+    //         <Picker.Item label="JavaScript" value="js" />
+    //     </Picker> */}
+    //   </KeyboardAvoidingView>
+    // </LinearGradient>
   );
 }
 
-// Listing Thumbnail system for showing pictures?? 
-// // GOOD
-// var icon = this.props.active
-//   ? require('./my-icon-active.png')
-//   : require('./my-icon-inactive.png');
-// <Image source={icon} />;
-
 // style constants
-// const PREFER_BUTTON_CURVE_RADIUS = 20; NO LONGER USED
 const IMAGE_CURVE_RADIUS = 100;
 const TEAL = '#4EE2C6';
 const PURPLE = '#661DCE';

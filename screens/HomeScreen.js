@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Dimensions, Vibration, Share } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from '../App';
+import CardStack, { Card } from 'react-native-card-stack-swiper';
+import Demo from '../assets/data/demo.js';
+import CardItem from '../components/CardItem';
 
 export default function HomeScreen({ navigation }) {
 
@@ -33,7 +36,29 @@ export default function HomeScreen({ navigation }) {
       locations={[0.0, 1.0]}
       style={styles.container}
     >
-      <ListingCard
+      <CardStack
+          loop={true}
+          verticalSwipe={false}
+          renderNoMoreCards={() => null}
+          //ref={swiper => (this.swiper = swiper)}
+        >
+          {Demo.map((item, index) => (
+            <Card key={index}>
+              <CardItem
+                imageSrc={item.imageSrc}
+                size={item.size}
+                brand={item.brand}
+                title={item.title}
+                description={item.description}
+                price={item.price}
+                // actions
+                // onPressLeft={() => this.swiper.swipeLeft()}
+                // onPressRight={() => this.swiper.swipeRight()}
+              />
+            </Card>
+          ))}
+        </CardStack>
+      {/* <ListingCard
         onPress={() => navigation.navigate('CardDisplayListing')}
         imageSrc={require('../assets/images/clothingDemos/KOPT/aeModelledGreenDress.jpg')}
         size={'S'}
@@ -41,7 +66,7 @@ export default function HomeScreen({ navigation }) {
         title={'cute sundress!'}
         description={'just trying to get rid of it, plz come get it rn'}
         price={'$19'}
-      />
+      /> */}
       <View style={styles.swipeButtons}> 
         <SwipeButton // rewind button
           icon="rewind"
@@ -75,44 +100,6 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
     </LinearGradient>
-  );
-}
-
-export function ListingCard({ onPress, imageSrc, size, brand, title, description, price }) {
-  return (
-    <TouchableOpacity 
-        style={styles.listingCard}
-        activeOpacity={.8}
-        onPress={onPress}
-      >
-        <Image
-          source={imageSrc}
-          style={styles.listingImage}
-        />
-        <LinearGradient
-          colors={['transparent', 'transparent',  'rgba(0,0,0,.6)', 'rgba(0,0,0,1)']}
-          locations={[0.0, 0.7, .85, 1.0]}
-          style={styles.opaqueGradient}
-        >
-        </LinearGradient>
-        <Text style={styles.sizeText}>
-            {size}
-        </Text>
-        <View style={styles.textGroup}>
-          <Text style={styles.brandText}>
-            {brand}
-          </Text>
-          <Text style={styles.bigText}>
-            {title}
-          </Text>
-          <Text style={styles.descriptText}>
-            {description}
-          </Text>
-          <Text style={styles.priceText}>
-            {price}
-          </Text>
-        </View>
-      </TouchableOpacity>
   );
 }
 
@@ -160,100 +147,6 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
 
-  listingCard: {
-    height: Dimensions.get('window').height * (.75),
-    backgroundColor: '#fbfbfb',
-    margin: 10,
-    marginBottom: 0,
-    borderRadius: 12,    
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.1,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-  },
-  listingImage: {
-    borderRadius: 12,
-    //resizeMode: 'contain',
-    height: '100%',
-    width: '100%',
-  },
-  opaqueGradient: {
-    position: 'absolute',
-    bottom: 0,
-    padding: 12,
-    paddingTop: 0,
-    width: '100%',
-    height: '100%',
-    opacity: .3,
-    borderRadius: 12,
-  },
-  textGroup: {
-    position: 'absolute',
-    bottom: 10,
-    padding: 12,
-    paddingTop: 0,
-    width: '100%',
-  },
-  brandText: {
-    position: 'absolute', 
-    left: 15,
-    bottom: 63,
-    padding: 3,
-    fontSize: 13,
-    color: YELLOW,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    fontFamily: 'Inter-Black',
-    textTransform: 'uppercase',
-    borderBottomLeftRadius: 5,
-    overflow: 'hidden',
-  },
-  bigText: {
-    position: 'absolute', 
-    left: 10,
-    bottom: 25,
-    padding: 5,
-    paddingBottom: 0,
-    fontSize: 35,
-    color: 'white',
-    fontFamily: 'Inter-Black',
-    overflow: 'hidden', //need to add a height or it just goes to next line
-    width: '93%',
-  },
-  descriptText: {
-    position: 'absolute',
-    left: 20,
-    bottom: 10,
-    fontSize: 16,
-    color: 'white',
-    opacity: 1,
-    fontFamily: 'Inter-Light',
-  },
-  priceText: {
-    position: 'absolute',
-    right: 15,
-    bottom: 35,
-    fontSize: 20,
-    color: 'white',
-    fontFamily: 'Inter-Light',
-  },
-  sizeText: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    fontSize: 25,
-    color: 'white',
-
-    fontFamily: 'Inter-Bold',
-  },
-
   // BUTTONS
   swipeButtons: {
     flex: 1,
@@ -261,6 +154,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     marginTop: 0,
+    position: "absolute",
+    alignSelf: 'center',
+    bottom: 10,
   },
   bigButton: {
     backgroundColor: 'white',
